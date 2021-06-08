@@ -8,10 +8,30 @@ import java.awt.Color;
 public interface IPixel {
 
   /**
-   * Gets the RGB Color for this pixel.
-   * @return The specific Color attributed to this pixel.
+   * Gets the RGB Color for this pixel in the form of an array of ints.
+   *
+   * @return The specific RGB color values attributed to this pixel.
    */
-  Color getRGB();
+  int[] getRGB();
 
+  /**
+   * Returns the R in RGB which is the level of red hue in the pixel's color.
+   *
+   * @return amount of red hue in this pixel's RGB value.
+   */
+  int getRed();
 
+  /**
+   * Returns the G in RGB which is the level of green hue in the pixel's color.
+   *
+   * @return amount of green hue in this pixel's RGB value.
+   */
+  int getGreen();
+
+  /**
+   * Returns the B in RGB which is the level of blue hue in the pixel's color.
+   *
+   * @return amount of blue hue in this pixel's RGB value.
+   */
+  int getBlue();
 }

@@ -5,4 +5,5 @@ package HW05.Model;
  */
 public abstract class Transformation implements IFunction {
 
+
 }

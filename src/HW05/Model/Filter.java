@@ -3,9 +3,11 @@ package HW05.Model;
 /**
  * This class represents a general filter to be applied to an image
  */
-public abstract class Filter implements IFunction {
+// NOT SURE ABOUT THE GENERIC TYPES HERE
+public abstract class Filter<K> implements IFunction<K> {
 
-  public void apply() {
-
+  @Override
+  public K apply() {
+    return null;
   }
 }

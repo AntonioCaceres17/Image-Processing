@@ -3,12 +3,10 @@ package HW05.Model;
 /**
  * Interface representing an image function.
  */
-public interface IFunction {
+public interface IFunction<K> {
 
   /**
    * Applies this function object to the given image.
    */
-  void apply();
-
-
+  K apply();
 }
