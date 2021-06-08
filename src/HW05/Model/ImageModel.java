@@ -20,4 +20,26 @@ public interface ImageModel<K> {
    * @return a 2D array containing the pixels of type K in the ImageModel
    */
   K[][] getPixels();
+
+  /**
+   * Returns the width of the image in number of pixels.
+   *
+   * @return width of the image
+   */
+  int width();
+
+  /**
+   * Returns the height of the image in number of pixels.
+   *
+   * @return height of the image
+   */
+  int height();
+
+  /**
+   * Returns the max value of any of the values that make up the hue of the pixels used to form
+   * the image.
+   *
+   * @return max value of pixels.
+   */
+  int maxValue();
 }
