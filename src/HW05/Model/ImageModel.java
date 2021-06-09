@@ -22,6 +22,14 @@ public interface ImageModel {
   IPixel[][] getPixels();
 
   /**
+   *
+   * @param x x coordinate of the pixel
+   * @param y y coordinate of the pixel
+   * @return
+   */
+  IPixel getPixel(int x, int y);
+
+  /**
    * Returns the width of the image in number of pixels.
    *
    * @return width of the image

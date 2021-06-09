@@ -1,12 +1,12 @@
 package HW05.Model;
 
-public class PixelRGB implements IPixelRGB {
+public class RGBPixel implements IPixel {
 
   private final Integer red;
   private final Integer green;
   private final Integer blue;
 
-  public PixelRGB(Integer red, Integer green, Integer blue) {
+  public RGBPixel(Integer red, Integer green, Integer blue) {
     this.red = red;
     this.blue = blue;
     this.green = green;

@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * Class that represents a 2D image.
  */
-public abstract class Image2D implements ImageModel {
+public class Image2D implements ImageModel {
 
   private final int width;
   private final int height;
@@ -15,12 +15,63 @@ public abstract class Image2D implements ImageModel {
   private final int maxValue;
   private final IPixel[][] pixels;
 
-  protected Image2D(int width, int height, int minValue, int maxValue, IPixel[][] pixels) {
+  public Image2D(int width, int height, int minValue, int maxValue, IPixel[][] pixels) {
     this.width = width;
     this.height = height;
     this.minValue = minValue;
     this.maxValue = maxValue;
     this.pixels = pixels;
+  }
+
+  protected static class ImageReader {
+
+    protected static ImageModel createImageFromPPM(String filename)
+        throws IllegalArgumentException {
+      Scanner sc;
+
+      try {
+        sc = new Scanner(new FileInputStream(filename));
+      }
+      catch (FileNotFoundException e) {
+        throw new IllegalArgumentException("File "+filename+ " not found!");
+      }
+      StringBuilder builder = new StringBuilder();
+      //read the file line by line, and populate a string. This will throw away any comment lines
+      while (sc.hasNextLine()) {
+        String s = sc.nextLine();
+        if (s.charAt(0)!='#') {
+          builder.append(s+System.lineSeparator());
+        }
+      }
+
+      //now set up the scanner to read from the string we just built
+      sc = new Scanner(builder.toString());
+
+      String token;
+
+      token = sc.next();
+      if (!token.equals("P3")) {
+        throw new IllegalArgumentException("Invalid PPM file: plain RAW file should begin with P3");
+      }
+      int width = sc.nextInt();
+      int height = sc.nextInt();
+      int maxValue = sc.nextInt();
+      //System.out.println("Maximum value of a color in this file (usually 256): "+maxValue);
+
+      // have to make sure height/width is not backwards
+      IPixel[][] imagePixels = new IPixel[height][width];
+
+      for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+          int r = sc.nextInt();
+          int g = sc.nextInt();
+          int b = sc.nextInt();
+          imagePixels[i][j] = new RGBPixel(r, g, b);
+        }
+      }
+
+      return new Image2DRGB(height, width, 0, maxValue,  imagePixels);
+    }
   }
 
   @Override
@@ -49,14 +100,19 @@ public abstract class Image2D implements ImageModel {
   }
 
   @Override
+  public IPixel getPixel(int x, int y) {
+    return pixels[x][y];
+  }
+
+  @Override
   public ImageModel copyProperties(IPixel[][] pixels)
       throws IllegalArgumentException {
     try {
       for (IPixel[] row: pixels) {
         for (IPixel pixel: row) {
-          for (Comparable channel: pixel.getChannels()) {
+          for (Integer channel: pixel.getChannels()) {
             try {
-              if (channel.compareTo(minValue()) <= 0 || channel.compareTo(maxValue()) >= 0) {
+              if (channel <= 0 || channel >= maxValue()) {
                 throw new IllegalArgumentException("Invalid pixel: " + channel.toString() + ".");
               }
             } catch (ClassCastException cce) {

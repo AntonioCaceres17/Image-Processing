@@ -29,22 +29,23 @@ public abstract class Filter implements IFunction {
 
     for (int y = 0; y < image.height(); y++) {
       for (int x = 0; x < image.width(); x++) {
-
+        applyFilter(image, y, x);
       }
     }
 
     return image.copyProperties(filteredImage);
   }
 
-  private Double[] applyFilter(ImageModel image, int r, int c) {
-    Comparable[] channels = image.getPixels()[r][c].getChannels();
-    Double[] sumForChannels = new Double[channels.length];
+  private Double[] applyFilter(ImageModel image, int imageX, int imageY) {
+    IPixel currentPixel = image.getPixel(imageX, imageY);
+    Double[] sumForChannels = new Double[currentPixel.getChannels().length];
 
-    for (int i = 0; i < channels.length; i++) {
+    for (int i = 0; i < currentPixel.getChannels().length; i++) {
+      Double sum = 0.0;
       for (int y = 0 - kernel.y; y < filter.length - kernel.y; y++) {
         for (int x = 0 - kernel.x; x < filter[x].length - kernel.x; x++) {
           if (y >= 0 && y < image.width() && x >= 0 && x < image.height()) {
-
+            sum += filter[y][x] * image.getPixel(imageX + x, imageY + y).getChannels()[i];
           }
         }
       }
@@ -53,5 +54,4 @@ public abstract class Filter implements IFunction {
     return sumForChannels;
   }
 
-  protected abstract IPixel createPixel();
 }
