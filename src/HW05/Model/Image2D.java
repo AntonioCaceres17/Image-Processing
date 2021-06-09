@@ -23,9 +23,9 @@ public class Image2D implements ImageModel {
     this.pixels = pixels;
   }
 
-  protected static class ImageReader {
+  public static class ImageReader {
 
-    protected static ImageModel createImageFromPPM(String filename)
+    public static ImageModel createImageFromPPM(String filename)
         throws IllegalArgumentException {
       Scanner sc;
 

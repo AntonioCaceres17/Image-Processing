@@ -4,13 +4,13 @@ import HW05.Model.IPixel;
 import HW05.Model.ImageModel;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 
-
-public class exportImage {
+public class ExportImage {
 
   ImageModel image;
 
-  public exportImage(ImageModel image) {
+  public ExportImage(ImageModel image) {
     this.image = image;
   }
 
@@ -32,12 +32,12 @@ public class exportImage {
           writer.write(pixels[i][j].getRed() + " "
               + pixels[i][j].getGreen() + " "
               + pixels[i][j].getBlue());
-          writer.write(String.format("%t"));
+          writer.write("\t");
         }
         writer.write(System.getProperty("line.separator"));
       }
       writer.close();
-    }catch (Exception e) {
+    } catch (IOException e) {
       throw new IllegalArgumentException();
     }
   }

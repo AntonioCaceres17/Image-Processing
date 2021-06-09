@@ -55,7 +55,7 @@ public abstract class Filter implements IFunction {
 
       // clamp values
       if (sum > image.maxValue()) {
-        sum = (double) image.maxValue() - 1;
+        sum = (double) image.maxValue();
       } else if (sum < image.minValue()) {
         sum = (double) image.minValue();
       }
