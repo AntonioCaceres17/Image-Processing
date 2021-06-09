@@ -6,8 +6,10 @@ package HW05.Model;
 // NOT SURE ABOUT THE GENERIC TYPES HERE
 public abstract class Filter<K> implements IFunction<K> {
 
+  protected IPixel[] imagePixels;
+
   @Override
-  public K apply() {
+  public K apply(K image) {
     return null;
   }
 }

@@ -8,5 +8,5 @@ public interface IFunction<K> {
   /**
    * Applies this function object to the given image.
    */
-  K apply();
+  K apply(K image);
 }
