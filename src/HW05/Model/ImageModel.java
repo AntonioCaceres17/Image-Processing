@@ -6,7 +6,7 @@ package HW05.Model;
  * Note: An image is reprsented by an array of pixels of type K.
  * And each pixels have a list of colors, RGB.
  */
-public interface ImageModel<K> {
+public interface ImageModel {
 
   // Notes:
   // Pixels should be an array
@@ -19,7 +19,7 @@ public interface ImageModel<K> {
    *
    * @return a 2D array containing the pixels of type K in the ImageModel
    */
-  K[][] getPixels();
+  IPixel[][] getPixels();
 
   /**
    * Returns the width of the image in number of pixels.
@@ -35,11 +35,30 @@ public interface ImageModel<K> {
    */
   int height();
 
+
   /**
-   * Returns the max value of any of the values that make up the hue of the pixels used to form
+   * Returns the minimum value of any of the values that make up the hue of the pixels used to form
+   * the image.
+   *
+   * @return min value of pixels.
+   */
+  int minValue();
+
+  /**
+   * Returns the maximum value of any of the values that make up the hue of the pixels used to form
    * the image.
    *
    * @return max value of pixels.
    */
   int maxValue();
+
+  /**
+   * Creates a new image but uses the same image properties as the original one. This is used when
+   * creating a new image with a filter or transformation.
+   *
+   * @param pixels the pixels of the new image
+   * @return a new ModelImage with the all values remaining the same except the pixels are different
+   * @throws IllegalArgumentException if the values of any of the pixels are illegal
+   */
+  ImageModel copyProperties(IPixel[][] pixels) throws IllegalArgumentException;
 }
