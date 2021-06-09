@@ -112,7 +112,7 @@ public class Image2D implements ImageModel {
         for (IPixel pixel: row) {
           for (Integer channel: pixel.getChannels()) {
             try {
-              if (channel <= 0 || channel >= maxValue()) {
+              if (channel < 0 || channel > maxValue()) {
                 throw new IllegalArgumentException("Invalid pixel: " + channel.toString() + ".");
               }
             } catch (ClassCastException cce) {
