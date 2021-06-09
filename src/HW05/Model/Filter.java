@@ -29,29 +29,41 @@ public abstract class Filter implements IFunction {
 
     for (int y = 0; y < image.height(); y++) {
       for (int x = 0; x < image.width(); x++) {
-        applyFilter(image, y, x);
+         Integer[] updatedChannels = applyFilter(image, x, y);
+         filteredImage[y][x] = makePixel(updatedChannels);
       }
     }
 
     return image.copyProperties(filteredImage);
   }
 
-  private Double[] applyFilter(ImageModel image, int imageX, int imageY) {
+  private Integer[] applyFilter(ImageModel image, int imageX, int imageY) {
     IPixel currentPixel = image.getPixel(imageX, imageY);
-    Double[] sumForChannels = new Double[currentPixel.getChannels().length];
+    Integer[] sumForChannels = new Integer[currentPixel.getChannels().length];
 
     for (int i = 0; i < currentPixel.getChannels().length; i++) {
       Double sum = 0.0;
       for (int y = 0 - kernel.y; y < filter.length - kernel.y; y++) {
         for (int x = 0 - kernel.x; x < filter[x].length - kernel.x; x++) {
-          if (y >= 0 && y < image.width() && x >= 0 && x < image.height()) {
+          if (imageY + y >= 0 && imageY + y < image.width()
+              && imageX + x >= 0 && imageX + x < image.height()) {
             sum += filter[y][x] * image.getPixel(imageX + x, imageY + y).getChannels()[i];
           }
         }
       }
+
+
+      // clamp values
+      if (sum > image.maxValue()) {
+        sum = (double) image.maxValue() - 1;
+      } else if (sum < image.minValue()) {
+        sum = (double) image.minValue();
+      }
+      sumForChannels[i] = sum.intValue();
     }
 
     return sumForChannels;
   }
 
+  protected abstract IPixel makePixel(Integer[] channels);
 }

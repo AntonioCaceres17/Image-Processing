@@ -22,10 +22,11 @@ public interface ImageModel {
   IPixel[][] getPixels();
 
   /**
+   * Returns the pixel at the given coordinate.
    *
    * @param x x coordinate of the pixel
    * @param y y coordinate of the pixel
-   * @return
+   * @return IPixel at (x,y)
    */
   IPixel getPixel(int x, int y);
 

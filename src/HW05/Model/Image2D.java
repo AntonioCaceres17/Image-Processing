@@ -101,7 +101,7 @@ public class Image2D implements ImageModel {
 
   @Override
   public IPixel getPixel(int x, int y) {
-    return pixels[x][y];
+    return pixels[y][x];
   }
 
   @Override

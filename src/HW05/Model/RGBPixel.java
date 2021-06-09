@@ -12,6 +12,15 @@ public class RGBPixel implements IPixel {
     this.green = green;
   }
 
+  public RGBPixel(Integer[] channels) throws IllegalArgumentException {
+    if (channels.length != 3) {
+      throw new IllegalArgumentException("RGB Pixel must have 3 values.");
+    }
+    this.red = channels[0];
+    this.blue = channels[1];
+    this.green = channels[2];
+  }
+
   @Override
   public Integer[] getChannels() {
     return new Integer[]{red, green, blue};
