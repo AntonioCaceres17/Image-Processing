@@ -1,7 +1,5 @@
 package HW05.Model;
 
-import java.io.PipedInputStream;
-
 public class RGBPixel implements IPixel {
 
   private final int red;

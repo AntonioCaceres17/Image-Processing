@@ -34,21 +34,25 @@ public abstract class Transformation implements IFunction {
    */
   private IPixel applyTransformation(IPixel curPixel, int minValue, int maxValue) {
     int[]channels = curPixel.getChannels();
-    double[]finalColor = new double[channels.length];
+    int[]finalColor = new int[channels.length];
 
     for (int i = 0; i < channels.length; i++) {
       double transformedColor = 0;
       for (int j = 0; j < colorMatrix[i].length; j++) {
-        transformedColor += channels[i] * colorMatrix[i][j];
+        transformedColor += channels[j] * colorMatrix[i][j];
       }
       if (transformedColor > maxValue) {
         transformedColor = maxValue;
       } else if (transformedColor < minValue) {
         transformedColor = minValue;
       }
-      finalColor[i] = transformedColor;
+      finalColor[i] = (int) transformedColor;
     }
 
-    return new RGBPixel((int) finalColor[0], (int) finalColor[1], (int) finalColor[2]);
+    //System.out.println(finalColor[0] + " " + finalColor[1] + " " + finalColor[2]);
+    //return new RGBPixel((int) finalColor[0], (int) finalColor[1], (int) finalColor[2]);
+    return makePixel(finalColor);
   }
+
+  protected abstract IPixel makePixel(int[] channels);
 }

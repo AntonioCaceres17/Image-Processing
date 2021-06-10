@@ -6,11 +6,7 @@ package HW05.Model;
  * <br> | 0.393 0.769 0.189 |
  * <br>| 0.349  0.686 0.168 |<br>| 0.272 0.534 0.131 |
  */
-public class Sepia extends Transformation {
-// private final double[][] sepiaMatrix =
-//  {{0.393 , 0.769 , 0.189},
-//    {0.349, 0.686, 0.168},
-//    {0.272, 0.534, 0.131}} ;
+public class Sepia extends RGBTransformation {
 
  /**
   * Constructor for Sepia transformation class.
@@ -21,6 +17,4 @@ public class Sepia extends Transformation {
        {0.349, 0.686, 0.168},
        {0.272, 0.534, 0.131}});
   }
-
-
 }
