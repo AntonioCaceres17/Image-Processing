@@ -22,9 +22,13 @@ public class TransformationTest {
 
   @Test
   public void testSepiaTone() {
-    IPixel[][] testPixels = testImage.getPixels();
+    ImageModel imageSepia = testImage;
     IFunction sepia = new Sepia();
-    assertEquals(50, testImage.getPixel(1,0).getRed());
+    assertEquals(50, imageSepia.getPixel(1,0).getRed());
+    imageSepia = sepia.apply(testImage);
+    // r = .393* 50 + .769 * 50 + .189 * 50 or 67.55
+    System.out.println(imageSepia);
+    assertEquals(50, imageSepia.getPixel(1,0).getRed());
   }
 
 }

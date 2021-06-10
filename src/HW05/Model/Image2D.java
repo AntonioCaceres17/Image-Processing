@@ -35,6 +35,9 @@ public class Image2D implements ImageModel {
       catch (FileNotFoundException e) {
         throw new IllegalArgumentException("File "+filename+ " not found!");
       }
+      catch (NullPointerException e) {
+        throw new IllegalArgumentException("File name cannot be null!");
+      }
       StringBuilder builder = new StringBuilder();
       //read the file line by line, and populate a string. This will throw away any comment lines
       while (sc.hasNextLine()) {

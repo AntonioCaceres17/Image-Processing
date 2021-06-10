@@ -1,5 +1,7 @@
 package HW05.Model;
 
+import java.io.PipedInputStream;
+
 public class RGBPixel implements IPixel {
 
   private final int red;
@@ -39,5 +41,24 @@ public class RGBPixel implements IPixel {
   @Override
   public int getBlue() {
     return blue;
+  }
+
+  @Override
+  public int hashCode() {
+    return this.getRed() * 5 + this.blue * 3 + this.green * 1;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if(o == this) {
+      return true;
+    }
+    if(!(o instanceof RGBPixel)) {
+      return false;
+    }
+
+    IPixel p = (IPixel) o;
+
+    return this.hashCode() == p.hashCode();
   }
 }
