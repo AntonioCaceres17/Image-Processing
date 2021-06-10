@@ -11,6 +11,7 @@ public class Image2DTest {
 
   ImageModel imageKoala;
   ImageModel imageRGB;
+
   @Before
   public void initData() {
     IPixel[][] LoPixel = {
@@ -20,11 +21,11 @@ public class Image2DTest {
             new RGBPixel(255, 255, 255)}};
 
     imageRGB = new Image2D(2, 2, 0, 255, LoPixel);
-   imageKoala = ImageReader.createImageFromPPM("src/Koala.ppm");
-    }
+    imageKoala = ImageReader.createImageFromPPM("src/Koala.ppm");
+  }
 
-    @Test
-        public void testStoringValues() {
+  @Test
+  public void testStoringValues() {
     //Interprets the dimensions of the image
     assertEquals(1024, imageKoala.width());
     assertEquals(768, imageKoala.height());
@@ -43,16 +44,37 @@ public class Image2DTest {
   public void testIncorrectPPMFormat() {
     ImageReader.createImageFromPPM("test/P6PPMFile.ppm");
   }
+
   @Test(expected = IllegalArgumentException.class)
   public void testFileNotFound() {
     ImageReader.createImageFromPPM("src/Foo.ppm");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testNullProperties() {
+
+    IPixel[][] nullPixel = null;
+    imageRGB.copyProperties(nullPixel);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testEmptyProperties() {
+    IPixel[][] emptyPixel = new IPixel[5][5];
+    imageRGB.copyProperties(emptyPixel);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidProperties() {
+    IPixel[][] invalidPixels = {{new RGBPixel(300, 300, 300),
+        (new RGBPixel(-1, -20, 20))}};
+    imageRGB.copyProperties(invalidPixels);
   }
 
   @Test
   public void testCopyProperties() {
     IPixel[][] samePixels = imageRGB.getPixels();
     ImageModel sameImage = imageRGB.copyProperties(samePixels);
-    assertEquals(sameImage.getPixel(0,0), imageRGB.getPixel(0,0));
+    assertEquals(sameImage.getPixel(0, 0), imageRGB.getPixel(0, 0));
     assertEquals(sameImage.height(), imageRGB.height());
     assertSame(sameImage.getPixels(), imageRGB.getPixels());
   }
