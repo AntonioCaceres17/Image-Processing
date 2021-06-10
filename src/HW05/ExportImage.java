@@ -39,7 +39,7 @@ public class ExportImage {
       writer.write(System.getProperty("line.separator"));
       writer.write(image.width() + " " + image.height());
       writer.write(System.getProperty("line.separator"));
-      writer.write(Integer.toString(image.maxValue()));
+      writer.write(Integer.toString(image.maxPixelValue()));
       writer.write(System.getProperty("line.separator"));
       //Pixels
       for (int i = 0; i < pixels.length; i++) {

@@ -51,7 +51,7 @@ public interface ImageModel {
    *
    * @return min value of pixels.
    */
-  int minValue();
+  int minPixelValue();
 
   /**
    * Returns the maximum value of any of the values that make up the hue of the pixels used to form
@@ -59,7 +59,7 @@ public interface ImageModel {
    *
    * @return max value of pixels.
    */
-  int maxValue();
+  int maxPixelValue();
 
   /**
    * Creates a new image but uses the same image properties as the original one. This is used when

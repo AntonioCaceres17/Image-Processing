@@ -30,8 +30,8 @@ public class Image2DTest {
     assertEquals(768, imageKoala.height());
 
     // Interprets the max/min value of the image channels
-    assertEquals(255, imageKoala.maxValue());
-    assertEquals(0, imageKoala.minValue());
+    assertEquals(255, imageKoala.maxPixelValue());
+    assertEquals(0, imageKoala.minPixelValue());
   }
 
   @Test(expected = IllegalArgumentException.class)
