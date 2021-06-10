@@ -70,7 +70,9 @@ public class Image2D implements ImageModel {
         }
       }
 
-      return new Image2DRGB(height, width, 0, maxValue,  imagePixels);
+      System.out.println("width: " + width + ", height: " + height);
+
+      return new Image2D(width, height, 0, maxValue,  imagePixels);
     }
   }
 
@@ -125,6 +127,6 @@ public class Image2D implements ImageModel {
       throw new IllegalArgumentException("Null pixel.");
     }
 
-    return new Image2DRGB(width(), height(), minValue(), maxValue(), pixels);
+    return new Image2D(width(), height(), minValue(), maxValue(), pixels);
   }
 }

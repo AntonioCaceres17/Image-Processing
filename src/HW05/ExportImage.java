@@ -24,7 +24,7 @@ public class ExportImage {
    * @throws IllegalArgumentException if the Image or filename is invalid
    */
   public void makePPM(String filename) throws IllegalArgumentException {
-    if(image.getPixels().length ==  0 || filename == null) {
+    if (image.getPixels().length ==  0 || filename == null) {
       throw new IllegalArgumentException("Image or Filename is invalid!");
     }
     IPixel[][] pixels = image.getPixels();
@@ -37,7 +37,7 @@ public class ExportImage {
       //header
       writer.write("P3");
       writer.write(System.getProperty("line.separator"));
-      writer.write(image.height() + " " + image.width());
+      writer.write(image.width() + " " + image.height());
       writer.write(System.getProperty("line.separator"));
       writer.write(Integer.toString(image.maxValue()));
       writer.write(System.getProperty("line.separator"));

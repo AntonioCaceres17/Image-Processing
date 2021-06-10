@@ -11,19 +11,19 @@ public abstract class Transformation implements IFunction {
     this.colorMatrix = colorMatrix;
   }
 
-
-
   public ImageModel apply(ImageModel image) throws IllegalArgumentException {
     if (image == null || image.getPixels().length == 0) {
       throw new IllegalArgumentException("Image cannot be empty!");
     }
     IPixel[][] pixels = image.getPixels();
+    // You did not have this before
+    IPixel[][] transformedImage = new IPixel[image.height()][image.width()];
     for (int i = 0; i < pixels.length; i++) {
       for (int j = 0; j < pixels[i].length; j++) {
-        pixels[i][j] = multiply(pixels[i][j]);
+        transformedImage[i][j] = multiply(image.getPixel(j, i));
       }
     }
-    return image.copyProperties(pixels);
+    return image.copyProperties(transformedImage);
   }
   /**
    * This applies the matrix multiplication needed for the color transformation and flattens it to
