@@ -36,15 +36,19 @@ public abstract class Transformation implements IFunction {
     int[]colors = {toMultiply.getRed(), toMultiply.getGreen() , toMultiply.getBlue()};
     double[]finalColor = new double[3];
     for(int i = 0; i < colorMatrix.length; i ++) {
+      double colorAdd = 0.0;
       for(int j = 0; j < colors.length; j++) {
         for(int k = 0; k < colorMatrix[i].length; k++) {
-          finalColor[j] += colorMatrix[k][j] * colors[j];
-          if(finalColor[j] > 255) {
-            finalColor[j] = 255;
-          }
+          colorAdd += colorMatrix[j][k] * colors[i];
+
         }
       }
+
+      if(colorAdd > 255) {
+        colorAdd = 255;
+      }
+      finalColor[i] = colorAdd;
     }
-    return new RGBPixel(  (int) finalColor[0], (int)finalColor[1], (int) finalColor[2]);
+    return new RGBPixel( (int) finalColor[0], (int)finalColor[1], (int) finalColor[2]);
   }
 }
