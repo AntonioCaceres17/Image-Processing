@@ -9,7 +9,7 @@ import javax.swing.text.Position;
 // NOT SURE ABOUT THE GENERIC TYPES HERE
 public abstract class Filter implements IFunction {
 
-  protected final Double[][] filter;
+  protected final double[][] filter;
   protected final Point kernel;
 
   /**
@@ -18,7 +18,7 @@ public abstract class Filter implements IFunction {
    * @param filter the filter to be applied
    * @param kernel the position representing the indices of the kernel in the given filter
    */
-  public Filter(Double[][] filter, Point kernel) {
+  public Filter(double[][] filter, Point kernel) {
     this.filter = filter;
     this.kernel = kernel;
   }
@@ -29,7 +29,7 @@ public abstract class Filter implements IFunction {
 
     for (int y = 0; y < image.height(); y++) {
       for (int x = 0; x < image.width(); x++) {
-         Integer[] updatedChannels = applyFilter(image, x, y);
+         int[] updatedChannels = applyFilter(image, x, y);
          filteredImage[y][x] = makePixel(updatedChannels);
       }
     }
@@ -37,12 +37,12 @@ public abstract class Filter implements IFunction {
     return image.copyProperties(filteredImage);
   }
 
-  private Integer[] applyFilter(ImageModel image, int imageX, int imageY) {
+  private int[] applyFilter(ImageModel image, int imageX, int imageY) {
     IPixel currentPixel = image.getPixel(imageX, imageY);
-    Integer[] sumForChannels = new Integer[currentPixel.getChannels().length];
+    int[] sumForChannels = new int[currentPixel.getChannels().length];
 
     for (int i = 0; i < currentPixel.getChannels().length; i++) {
-      Double sum = 0.0;
+      double sum = 0.0;
       for (int y = 0 - kernel.y; y < filter.length - kernel.y; y++) {
         for (int x = 0 - kernel.x; x < filter[x].length - kernel.x; x++) {
           if (imageY + y >= 0 && imageY + y < image.width()
@@ -59,11 +59,11 @@ public abstract class Filter implements IFunction {
       } else if (sum < image.minValue()) {
         sum = (double) image.minValue();
       }
-      sumForChannels[i] = sum.intValue();
+       sumForChannels[i] = (int) sum;
     }
 
     return sumForChannels;
   }
 
-  protected abstract IPixel makePixel(Integer[] channels);
+  protected abstract IPixel makePixel(int[] channels);
 }
