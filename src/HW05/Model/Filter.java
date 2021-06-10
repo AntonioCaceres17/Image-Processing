@@ -24,7 +24,11 @@ public abstract class Filter implements IFunction {
   }
 
   @Override
-  public ImageModel apply(ImageModel image) {
+  public ImageModel apply(ImageModel image) throws IllegalArgumentException {
+    if (image == null || image.getPixels().length == 0) {
+      throw new IllegalArgumentException("Image cannot be empty!");
+    }
+
     IPixel[][] filteredImage = new IPixel[image.height()][image.width()];
 
     for (int y = 0; y < image.height(); y++) {

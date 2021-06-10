@@ -22,7 +22,7 @@ public class ImageUtilTest {
     IFunction sepiaImage = new Sepia();
     ImageModel sepiaKoala = sepiaImage.apply(koala);
     ExportImage exportKoala = new ExportImage(sepiaKoala);
-    exportKoala.makePPM("test/KoalaSepia3.ppm");
+    exportKoala.makePPM("test/KoalaSepia4.ppm");
 //    IFunction blurImage = new BlurImage();
 //    ImageModel blurredKoala = blurImage.apply(koala);
 //    ExportImage exportBlurredKoala = new ExportImage(blurredKoala);

@@ -15,36 +15,40 @@ public abstract class Transformation implements IFunction {
     if (image == null || image.getPixels().length == 0) {
       throw new IllegalArgumentException("Image cannot be empty!");
     }
-    IPixel[][] pixels = image.getPixels();
     // You did not have this before
-    IPixel[][] transformedImage = new IPixel[image.height()][image.width()];
-    for (int i = 0; i < pixels.length; i++) {
-      for (int j = 0; j < pixels[i].length; j++) {
-        transformedImage[i][j] = multiply(image.getPixel(j, i));
+    IPixel[][] transformedPixels = new IPixel[image.height()][image.width()];
+    for (int y = 0; y < image.height(); y++) {
+      for (int x = 0; x < image.width(); x++) {
+        transformedPixels[y][x] = applyTransformation(image.getPixel(x, y),
+            image.minValue(), image.maxValue());
       }
     }
-    return image.copyProperties(transformedImage);
+    return image.copyProperties(transformedPixels);
   }
   /**
    * This applies the matrix multiplication needed for the color transformation and flattens it to
    * become a 1D array.
    *
-   * @param toMultiply the Pixel to be multiplied with this matrix
+   * @param curPixel the Pixel to be multiplied with this matrix
    * @return a modified version of the given Pixel
    */
-  protected IPixel multiply(IPixel toMultiply) {
-    int[]colors = {toMultiply.getRed(), toMultiply.getGreen() , toMultiply.getBlue()};
-    double[]finalColor = new double[3];
-    for(int i = 0; i < colorMatrix.length; i ++) {
-      for(int j = 0; j < colors.length; j++) {
-        for(int k = 0; k < colorMatrix[i].length; k++) {
-          finalColor[j] += colorMatrix[k][j] * colors[j];
-          if(finalColor[j] > 255) {
-            finalColor[j] = 255;
-          }
-        }
+  private IPixel applyTransformation(IPixel curPixel, int minValue, int maxValue) {
+    int[]channels = curPixel.getChannels();
+    double[]finalColor = new double[channels.length];
+
+    for (int i = 0; i < channels.length; i++) {
+      double transformedColor = 0;
+      for (int j = 0; j < colorMatrix[i].length; j++) {
+        transformedColor += channels[i] * colorMatrix[i][j];
       }
+      if (transformedColor > maxValue) {
+        transformedColor = maxValue;
+      } else if (transformedColor < minValue) {
+        transformedColor = minValue;
+      }
+      finalColor[i] = transformedColor;
     }
-    return new RGBPixel(  (int) finalColor[0], (int)finalColor[1], (int) finalColor[2]);
+
+    return new RGBPixel((int) finalColor[0], (int) finalColor[1], (int) finalColor[2]);
   }
 }

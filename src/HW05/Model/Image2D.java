@@ -70,8 +70,6 @@ public class Image2D implements ImageModel {
         }
       }
 
-      System.out.println("width: " + width + ", height: " + height);
-
       return new Image2D(width, height, 0, maxValue,  imagePixels);
     }
   }
