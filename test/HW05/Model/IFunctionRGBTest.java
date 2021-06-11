@@ -1,15 +1,18 @@
 package HW05.Model;
 
-import static org.junit.Assert.assertEquals;
-
 import HW05.ExportImage;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-public class IFunctionRGBTest {
+/**
+ * Abstract test class for Image function objects
+ */
+public abstract class IFunctionRGBTest {
 
-  ImageModel testImage;
+  private ImageModel testImage;
+
+  protected abstract IFunction createFunction();
 
   @Before
   public void initData() {
@@ -19,7 +22,7 @@ public class IFunctionRGBTest {
         {new RGBPixel(100, 0, 100),
             new RGBPixel(255, 255, 255)}};
 
-    testImage = new Image2D(2, 2, 0, 255, LoPixel);
+    testImage = new Image2D( LoPixel,0, 255);
   }
 
   @Test
@@ -44,8 +47,8 @@ public class IFunctionRGBTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testNullImageTransformation() {
-    IFunction transform = new Sepia();
+  public void testNullImageFunction() {
+    IFunction transform = createFunction();
     transform.apply(null);
   }
 
@@ -53,22 +56,7 @@ public class IFunctionRGBTest {
   public void testEmptyPixelTransformation() {
     IFunction transform = new Sepia();
     IPixel[][] emptyPixels = new IPixel[5][5];
-    ImageModel invalidModel = new Image2D(10, 10, 0, 255, emptyPixels);
+    ImageModel invalidModel = new Image2D( emptyPixels, 0, 255);
     transform.apply(invalidModel);
-  }
-
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testNullImageFilter() {
-    IFunction filter = new BlurImage();
-    filter.apply(null);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testEmptyImageFilter() {
-    IFunction filter = new BlurImage();
-    IPixel[][] emptyPixels = new IPixel[5][5];
-    ImageModel invalidModel = new Image2D(10, 10, 0, 255, emptyPixels);
-    filter.apply(invalidModel);
   }
 }

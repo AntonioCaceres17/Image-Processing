@@ -2,6 +2,8 @@ package HW05.Model;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -23,13 +25,14 @@ public class Image2D implements ImageModel {
     this.minPixelValue = minPixelValue;
     this.maxPixelValue = maxPixelValue;
 
-    testWidth();
+    testWidth(pixels);
+    testPixelValues(pixels);
     this.height = pixels.length;
     this.width = pixels[0].length;
   }
 
   // throws an error if the image width is invalid.
-  private void testWidth() throws IllegalArgumentException {
+  private void testWidth(IPixel[][] pixels) throws IllegalArgumentException {
     if (pixels[0] == null || pixels[0].length == 0) {
       throw new IllegalArgumentException("Image width is 0.");
     }
@@ -42,15 +45,24 @@ public class Image2D implements ImageModel {
   }
 
   // throws an error if any pixel has an illegal value.
-  private void testPixelValues() throws IllegalArgumentException {
-    for (IPixel[] row : pixels) {
-      for (IPixel pixel : row) {
-        for (int channel : pixel.getChannels()) {
-          if (channel < minPixelValue || channel > maxPixelValue) {
-            throw new IllegalArgumentException("Invalid pixel found containing value: " + channel);
+  private void testPixelValues(IPixel[][] pixels) throws IllegalArgumentException {
+    try {
+      for (IPixel[] row: pixels) {
+        for (IPixel pixel: row) {
+          for (Integer channel: pixel.getChannels()) {
+            try {
+              if (channel < minPixelValue || channel > maxPixelValue) {
+                throw new IllegalArgumentException(
+                    "Invalid pixel found containing value: " + channel);
+              }
+            } catch (ClassCastException cce) {
+              throw new IllegalArgumentException("Pixel types cannot be compared.");
+            }
           }
         }
       }
+    } catch (NullPointerException npe) {
+      throw new IllegalArgumentException("Null pixel.");
     }
   }
 
@@ -146,27 +158,31 @@ public class Image2D implements ImageModel {
   }
 
   @Override
-  public ImageModel copyProperties(IPixel[][] pixels)
-      throws IllegalArgumentException {
-    try {
-      for (IPixel[] row: pixels) {
-        for (IPixel pixel: row) {
-          for (Integer channel: pixel.getChannels()) {
-            try {
-              if (channel < 0 || channel > maxPixelValue()) {
-                throw new IllegalArgumentException(
-                    "Invalid pixel found containing value: " + channel);
-              }
-            } catch (ClassCastException cce) {
-              throw new IllegalArgumentException("Pixel types cannot be compared.");
-            }
-          }
-        }
-      }
-    } catch (NullPointerException npe) {
-      throw new IllegalArgumentException("Null pixel.");
-    }
+  public ImageModel copyProperties(IPixel[][] pixels) throws IllegalArgumentException {
+    testPixelValues(pixels);
+    testWidth(pixels);
 
     return new Image2D(width(), height(), minPixelValue(), maxPixelValue(), pixels);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Image2D image2D = (Image2D) o;
+    return width == image2D.width && height == image2D.height
+        && minPixelValue == image2D.minPixelValue && maxPixelValue == image2D.maxPixelValue
+        && Arrays.equals(pixels, image2D.pixels);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = Objects.hash(width, height, minPixelValue, maxPixelValue);
+    result = 31 * result + Arrays.hashCode(pixels);
+    return result;
   }
 }
