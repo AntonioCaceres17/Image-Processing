@@ -1,7 +1,6 @@
 package HW05.Model;
 
 import java.awt.Point;
-import javax.swing.text.Position;
 
 /**
  * This class represents a general filter to be applied to an image
@@ -57,10 +56,10 @@ public abstract class Filter implements IFunction {
       }
 
       // clamp values
-      if (sum > image.maxValue()) {
-        sum = image.maxValue();
-      } else if (sum < image.minValue()) {
-        sum = image.minValue();
+      if (sum > image.maxPixelValue()) {
+        sum = image.maxPixelValue();
+      } else if (sum < image.minPixelValue()) {
+        sum = image.minPixelValue();
       }
 
       sumForChannels[i] = (int) sum;
