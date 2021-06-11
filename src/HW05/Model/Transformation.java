@@ -20,7 +20,7 @@ public abstract class Transformation implements IFunction {
     for (int y = 0; y < image.height(); y++) {
       for (int x = 0; x < image.width(); x++) {
         transformedPixels[y][x] = applyTransformation(image.getPixel(x, y),
-            image.minValue(), image.maxValue());
+            image.minPixelValue(), image.maxPixelValue());
       }
     }
     return image.copyProperties(transformedPixels);
