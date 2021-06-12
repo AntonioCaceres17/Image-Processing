@@ -54,8 +54,10 @@ SHARPENIMAGE
 SharpenImage extends RGBFilter and is a function object that sharpens the given image when the user calls apply and passes in a valid imagemodel.
 
 Citations: 
-The P3 Files "flowers.ppm" and "croppedMule.ppm" used as an example is curtesy of The United States Naval Academy IC210 Website. 
+The P3 File "croppedMule.ppm" used as an example is curtesy of The United States Naval Academy IC210 Website. 
 https://www.usna.edu/Users/cs/choi/ic210/project/p01/index.html
+
+The P3 File "Acadia.ppm" used as an example is from an image I took while on a trip to Acadia Nation Park this spring.
 
 The P6 File used as a test for the curropt file is curtesy of Cornell's CS 664 - Computer Vision Website. 
 http://www.cs.cornell.edu/courses/cs664/2003fa/images/
