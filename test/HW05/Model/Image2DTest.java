@@ -128,5 +128,33 @@ public class Image2DTest {
     assertSame(sameImage.getPixels(), imageRGB.getPixels());
   }
 
+  @Test
+  public void testExportBlurFlowerPPM() {
+    ImageModel blurredFlowers = new BlurImage().apply(imageFlowers);
+    ExportImage exportFlowers = new ExportImage(blurredFlowers);
+    exportFlowers.makePPM("blurredFlowers.ppm");
+  }
 
+  @Test
+  public void testExportSharpenFlowerPPM() {
+    ImageModel blurredFlowers = new SharpenImage().apply(imageFlowers);
+    ExportImage exportFlowers = new ExportImage(blurredFlowers);
+    exportFlowers.makePPM("sharpenedFlowers.ppm");
+  }
+
+  @Test
+  public void testExportMuleBlurredPPM() {
+    ImageModel mule = ImageReader.createImageFromPPM("src/muleCropped.ppm");
+    ImageModel blurredMule = new BlurImage().apply(mule);
+    ExportImage exportFlowers = new ExportImage(blurredMule);
+    exportFlowers.makePPM("blurredMule.ppm");
+  }
+
+  @Test
+  public void testExportSharpenedMulePPM() {
+    ImageModel mule = ImageReader.createImageFromPPM("src/muleCropped.ppm");
+    ImageModel sharpenedMule = new SharpenImage().apply(mule);
+    ExportImage exportFlowers = new ExportImage(sharpenedMule);
+    exportFlowers.makePPM("sharpenedMule.ppm");
+  }
 }
