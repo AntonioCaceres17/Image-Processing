@@ -176,7 +176,22 @@ public class Image2D implements ImageModel {
     Image2D image2D = (Image2D) o;
     return width == image2D.width && height == image2D.height
         && minPixelValue == image2D.minPixelValue && maxPixelValue == image2D.maxPixelValue
-        && Arrays.equals(pixels, image2D.pixels);
+        && samePixels(pixels, image2D.getPixels());
+  }
+
+  private boolean samePixels(IPixel[][] pixels, IPixel[][] otherPixels) {
+    try {
+      for (int i = 0; i < pixels.length; i++) {
+        for (int j = 0; j < pixels[i].length; j++) {
+          if (!pixels[i][j].equals(otherPixels[i][j])) {
+            return false;
+          }
+        }
+      }
+    } catch (Exception e) {
+      return false;
+    }
+    return true;
   }
 
   @Override

@@ -11,7 +11,7 @@ import static org.junit.Assert.assertSame;
  */
 public class Image2DTest {
 
-  private ImageModel imageKoala;
+  private ImageModel imageFlowers;
   private ImageModel imageRGB;
 
   @Before
@@ -23,18 +23,18 @@ public class Image2DTest {
             new RGBPixel(255, 255, 255)}};
 
     imageRGB = new Image2D(LoPixel, 0, 255);
-    imageKoala = ImageReader.createImageFromPPM("src/Koala.ppm");
+    imageFlowers = ImageReader.createImageFromPPM("src/flowers.ppm");
   }
 
   @Test
   public void testStoringValues() {
     //Interprets the dimensions of the image
-    assertEquals(1024, imageKoala.width());
-    assertEquals(768, imageKoala.height());
+    assertEquals(1024, imageFlowers.width());
+    assertEquals(768, imageFlowers.height());
 
     // Interprets the max/min value of the image channels
-    assertEquals(255, imageKoala.maxPixelValue());
-    assertEquals(0, imageKoala.minPixelValue());
+    assertEquals(255, imageFlowers.maxPixelValue());
+    assertEquals(0, imageFlowers.minPixelValue());
   }
 
   @Test(expected = IllegalArgumentException.class)
