@@ -3,9 +3,6 @@ CS3500
 
 The goal of this program was to be able to take in, READ, CREATE, and REPRODUCE an image, specifically a P3 file.
 
-*********DELETE THIS********* FOR REFENCE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-A text README file explaining your design. Your README file should give the graders an overview of what the purposes are for every class, interface, etc. that you include in your model, so that they can quickly get a high-level overview of your code
-
 To start,
 
 IPIXEL
