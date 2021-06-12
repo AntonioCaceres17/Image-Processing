@@ -2,6 +2,9 @@ package HW05.Model;
 
 import java.awt.Point;
 
+/**
+ * Class representing a filter on an image made with RGB pixels.
+ */
 public abstract class RGBFilter extends Filter {
 
   /**

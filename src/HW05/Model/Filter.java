@@ -5,7 +5,6 @@ import java.awt.Point;
 /**
  * This class represents a general filter to be applied to an image
  */
-// NOT SURE ABOUT THE GENERIC TYPES HERE
 public abstract class Filter implements IFunction {
 
   protected final double[][] filter;
@@ -68,5 +67,11 @@ public abstract class Filter implements IFunction {
     return makePixel(sumForChannels);
   }
 
+  /**
+   * Returns a new IPixel for the filtered image.
+   *
+   * @param channels channels of the pixel to be made
+   * @return new IPixel for the image
+   */
   protected abstract IPixel makePixel(int[] channels);
 }

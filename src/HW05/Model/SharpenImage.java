@@ -2,6 +2,9 @@ package HW05.Model;
 
 import java.awt.Point;
 
+/**
+ * Sharpen Image function object class that represents a filter used to sharpen an image.
+ */
 public class SharpenImage extends RGBFilter {
 
   /**

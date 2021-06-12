@@ -8,12 +8,6 @@ package HW05.Model;
  */
 public interface ImageModel {
 
-  // Notes:
-  // Pixels should be an array
-  // We should create a version history of the images... thinking possibe
-  // hashmap with the new image mapped to a version number.
-  //
-
   /**
    * Returns a copy of the pixels making up the image.
    *
