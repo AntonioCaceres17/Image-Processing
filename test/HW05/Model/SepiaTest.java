@@ -2,10 +2,12 @@ package HW05.Model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test class for the Sepia Image transformation.
+ */
 public class SepiaTest extends IFunctionRGBTest {
 
   @Override

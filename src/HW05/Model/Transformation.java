@@ -5,8 +5,13 @@ package HW05.Model;
  */
 public abstract class Transformation implements IFunction {
 
-  protected final  double[][] colorMatrix;
+  protected final double[][] colorMatrix;
 
+  /**
+   * Constructor for Transformation class.
+   *
+   * @param colorMatrix color matrix for transformation
+   */
   public Transformation(double[][] colorMatrix) {
     this.colorMatrix = colorMatrix;
   }
@@ -52,5 +57,11 @@ public abstract class Transformation implements IFunction {
     return makePixel(finalColor);
   }
 
+  /**
+   * Returns a new IPixel for the transformed image.
+   *
+   * @param channels channels of the pixel to be made
+   * @return new IPixel for the image
+   */
   protected abstract IPixel makePixel(int[] channels);
 }

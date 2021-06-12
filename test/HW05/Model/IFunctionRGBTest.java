@@ -1,8 +1,6 @@
 package HW05.Model;
 
-import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
 /**
  * Abstract test class for Image function objects

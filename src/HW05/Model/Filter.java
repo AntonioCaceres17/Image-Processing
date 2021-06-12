@@ -67,5 +67,11 @@ public abstract class Filter implements IFunction {
     return makePixel(sumForChannels);
   }
 
+  /**
+   * Returns a new IPixel for the filtered image.
+   *
+   * @param channels channels of the pixel to be made
+   * @return new IPixel for the image
+   */
   protected abstract IPixel makePixel(int[] channels);
 }

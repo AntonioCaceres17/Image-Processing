@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class PixelTest {
 
-  IPixel rgbPixel;
+  private IPixel rgbPixel;
 
   @Before
   public void initData() {

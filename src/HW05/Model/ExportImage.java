@@ -7,11 +7,15 @@ import java.io.IOException;
 /**
  * This class exports an ImageModel to the desired type of image file.
  */
-
 public class ExportImage {
 
   private ImageModel image;
 
+  /**
+   * Constructor for ExportImage class.
+   *
+   * @param image image to be exported.
+   */
   public ExportImage(ImageModel image) {
     this.image = image;
   }

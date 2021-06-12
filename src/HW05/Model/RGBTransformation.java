@@ -1,7 +1,15 @@
 package HW05.Model;
 
+/**
+ * Class for transforming an image made with RGB pixels.
+ */
 public abstract class RGBTransformation extends Transformation {
 
+  /**
+   * Constructor for RGBTransformation class.
+   *
+   * @param colorMatrix The matric used to perform the transformation.
+   */
   public RGBTransformation(double[][] colorMatrix) {
     super(colorMatrix);
   }

@@ -2,6 +2,9 @@ package HW05.Model;
 
 import java.awt.Point;
 
+/**
+ * Class representing a filter used to blur an image.
+ */
 public class BlurImage extends RGBFilter {
 
   /**

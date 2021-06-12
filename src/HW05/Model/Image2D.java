@@ -18,6 +18,7 @@ public class Image2D implements ImageModel {
   private final IPixel[][] pixels;
 
   /**
+   * Constructor for the Image2D class.
    *
    * @param pixels        the pixels of the image
    * @param minPixelValue the minimum value allowed for a pixel's channel
