@@ -11,7 +11,7 @@ import static org.junit.Assert.assertSame;
  */
 public class Image2DTest {
 
-  private ImageModel imageFlowers;
+  private ImageModel imageAcadia;
   private ImageModel imageRGB;
 
   @Before
@@ -23,18 +23,18 @@ public class Image2DTest {
             new RGBPixel(255, 255, 255)}};
 
     imageRGB = new Image2D(LoPixel, 0, 255);
-    imageFlowers = ImageReader.createImageFromPPM("src/flowers.ppm");
+    imageAcadia = ImageReader.createImageFromPPM("src/Acadia.ppm");
   }
 
   @Test
   public void testStoringValues() {
     //Interprets the dimensions of the image
-    assertEquals(1024, imageFlowers.width());
-    assertEquals(768, imageFlowers.height());
+    assertEquals(1024, imageAcadia.width());
+    assertEquals(768, imageAcadia.height());
 
     // Interprets the max/min value of the image channels
-    assertEquals(255, imageFlowers.maxPixelValue());
-    assertEquals(0, imageFlowers.minPixelValue());
+    assertEquals(255, imageAcadia.maxPixelValue());
+    assertEquals(0, imageAcadia.minPixelValue());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -129,17 +129,17 @@ public class Image2DTest {
   }
 
   @Test
-  public void testExportBlurFlowerPPM() {
-    ImageModel blurredFlowers = new BlurImage().apply(imageFlowers);
+  public void testExportBlurAcadiaPPM() {
+    ImageModel blurredFlowers = new BlurImage().apply(imageAcadia);
     ExportImage exportFlowers = new ExportImage(blurredFlowers);
-    exportFlowers.makePPM("blurredFlowers.ppm");
+    exportFlowers.makePPM("blurredAcadia.ppm");
   }
 
   @Test
-  public void testExportSharpenFlowerPPM() {
-    ImageModel blurredFlowers = new SharpenImage().apply(imageFlowers);
+  public void testExportSharpenAcadiaPPM() {
+    ImageModel blurredFlowers = new SharpenImage().apply(imageAcadia);
     ExportImage exportFlowers = new ExportImage(blurredFlowers);
-    exportFlowers.makePPM("sharpenedFlowers.ppm");
+    exportFlowers.makePPM("sharpenedAcadia.ppm");
   }
 
   @Test

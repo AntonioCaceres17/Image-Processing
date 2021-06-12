@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class ExportImageTest {
 
-  private ImageModel image = ImageReader.createImageFromPPM("src/flowers.ppm");
+  private ImageModel image = ImageReader.createImageFromPPM("src/Acadia.ppm");
   private ExportImage exportImage = new ExportImage(image);
 
   @Test(expected = IllegalArgumentException.class)
@@ -19,13 +19,13 @@ public class ExportImageTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testExportMustEndWithPPM() {
-    exportImage.makePPM("flowersCopy.jpg");
+    exportImage.makePPM("AcadiaCopy.ppm");
   }
 
   @Test
   public void testExportImageAndImportSameOne() {
-    exportImage.makePPM("flowersCopy.ppm");
-    ImageModel copy = ImageReader.createImageFromPPM("flowersCopy.ppm");
+    exportImage.makePPM("AcadiaCopy.ppm");
+    ImageModel copy = ImageReader.createImageFromPPM("AcadiaCopy.ppm");
     assertEquals(copy, image);
   }
 }
