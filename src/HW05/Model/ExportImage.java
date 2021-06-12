@@ -4,13 +4,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * This class exports an ImageModel to the desired type of image file.
+ */
+
 public class ExportImage {
 
-  /**
-   * This class exports an ImageModel to the desired type of image file.
-   */
-
-  ImageModel image;
+  private ImageModel image;
 
   public ExportImage(ImageModel image) {
     this.image = image;

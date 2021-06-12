@@ -13,6 +13,11 @@ public class ExportImageTest {
   private ExportImage exportImage = new ExportImage(image);
 
   @Test(expected = IllegalArgumentException.class)
+  public void testGivenNullImage() {
+    ExportImage nullImage = new ExportImage(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
   public void testExportMustEndWithPPM() {
     exportImage.makePPM("flowersCopy.jpg");
   }

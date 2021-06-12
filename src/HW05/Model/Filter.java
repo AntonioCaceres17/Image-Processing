@@ -5,7 +5,6 @@ import java.awt.Point;
 /**
  * This class represents a general filter to be applied to an image
  */
-// NOT SURE ABOUT THE GENERIC TYPES HERE
 public abstract class Filter implements IFunction {
 
   protected final double[][] filter;

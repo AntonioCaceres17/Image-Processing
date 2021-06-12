@@ -15,7 +15,7 @@ public abstract class Transformation implements IFunction {
     if (image == null || image.getPixels().length == 0) {
       throw new IllegalArgumentException("Image cannot be empty!");
     }
-    // You did not have this before
+
     IPixel[][] transformedPixels = new IPixel[image.height()][image.width()];
     for (int y = 0; y < image.height(); y++) {
       for (int x = 0; x < image.width(); x++) {
@@ -49,8 +49,6 @@ public abstract class Transformation implements IFunction {
       finalColor[i] = (int) transformedColor;
     }
 
-    //System.out.println(finalColor[0] + " " + finalColor[1] + " " + finalColor[2]);
-    //return new RGBPixel((int) finalColor[0], (int) finalColor[1], (int) finalColor[2]);
     return makePixel(finalColor);
   }
 

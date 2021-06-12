@@ -17,6 +17,12 @@ public class Image2D implements ImageModel {
   private final int maxPixelValue;
   private final IPixel[][] pixels;
 
+  /**
+   *
+   * @param pixels        the pixels of the image
+   * @param minPixelValue the minimum value allowed for a pixel's channel
+   * @param maxPixelValue the maximum value allowed for a pixel's channel
+   */
   public Image2D(IPixel[][] pixels, int minPixelValue, int maxPixelValue) {
     if (pixels == null || pixels.length == 0) {
       throw new IllegalArgumentException("image is empty or null.");
@@ -66,6 +72,15 @@ public class Image2D implements ImageModel {
     }
   }
 
+  /**
+   * Constructor for ImageModel class used by ImageReader when making ImageModel from a .ppm file.
+   *
+   * @param width           the width of the image in number of pixels
+   * @param height          the height of the image in number of pixels
+   * @param minPixelValue   the minimum value allowed for a pixel's channel
+   * @param maxPixelValue   the maximum value allowed for a pixel's channel
+   * @param pixels          image pixels
+   */
   private Image2D(int width, int height, int minPixelValue, int maxPixelValue, IPixel[][] pixels) {
     this.width = width;
     this.height = height;
