@@ -76,6 +76,13 @@ public class Image2D implements ImageModel {
 
   public static class ImageReader {
 
+    /**
+     * This class takes in a PPM file name, searches for it, and stores it into the appropriate
+     * ImageModel class.
+     * @param filename the name of the file to be scanned.
+     * @return an ImageModel version of the file, ready to be modified
+     * @throws IllegalArgumentException if the file is invalid
+     */
     public static ImageModel createImageFromPPM(String filename)
         throws IllegalArgumentException {
       Scanner sc;
