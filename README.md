@@ -8,7 +8,6 @@ To start,
 IPIXEL
 We made and IPixel interface that stores and can ouput the standard RGB properties, as well as the specific channels properties. 
 
-
 RGBPIXEL
 For HW5, we are using a SRGB Pixel, hence the name of the class that implements IPixel, RGBPixel. It follows all the required aspects of IPixel, as well as an overwritten Hashcode and Equals method for testing purposes. 
 
@@ -26,14 +25,33 @@ TRANSFORMATION
 
 The transformation method is an Abstract class, that should be extended for any type of specific transformation to eliminate duplicate code. It implements the apply method which creates a copy of the given image and calls a different a different method to do Matrix calculations on the RGB each indivdual pixel. 
 
-RGBTransfomation
+RGBTRANSFORMATION
 
+The RGBTransformation class extends the abstract transformation class and implements the protected makePixel method by returning a new IPixel made from RGB values. This class transforms any RGB image by the matrix provided to it.
 
+SEPIA
 
-This class.....
+The Sepia class extends RGBTransformation and applies a sepia tone to any image made from RGB Pixels by calling apply and passing in a valid ImageModel.
 
+MONOCHROME
 
+The Monochrome class extends RGBTransformation and applies a monochrome tone to any image made from RGB Pixels by calling apply and passing in a valid ImageModel. The new ImageModel returned by apply has a grayscale image where all pixels now have the same RGB values.
 
+FILTER
+
+The Filter class is an abstract class that extends IFunction takes in a given filter, which is a 2D matrix of double values and its kernal, which is a Point.java, and applies the filter to every pixel in the image. It applies the filter by moving the kernel along every pixel in the image and adding the values of the RGB values of each channel of the pixel multiplied with the overlayed filter. The filter is used by creating a new non abstract filter object  and calling apply on a given ImageModel.
+
+RGBFILTER
+
+RGBFilter is an abstract class that extends Filter and overrides the protected method makePixel to return a new RGBPixel. This class is used whenever the ImageModel is made from RGBPixels.
+
+BLURIMAGE
+
+BlurImage extends RGBFilter and is a function object that blurs the given image when the user calls apply and passes in a valid imagemodel.
+
+SHARPENIMAGE
+
+SharpenImage extends RGBFilter and is a function object that sharpens the given image when the user calls apply and passes in a valid imagemodel.
 
 Citations: 
 The P3 Files "flowers.ppm" and "croppedMule.ppm" used as an example is curtesy of The United States Naval Academy IC210 Website. 
