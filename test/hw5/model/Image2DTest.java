@@ -1,6 +1,6 @@
-package HW05.Model;
+package hw5.model;
 
-import HW05.Model.Image2D.ImageReader;
+import hw5.model.Image2D.ImageReader;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -16,13 +16,13 @@ public class Image2DTest {
 
   @Before
   public void initData() {
-    IPixel[][] LoPixel = {
+    IPixel[][] loPixel = {
         {new RGBPixel(100, 100, 100),
             new RGBPixel(50, 50, 50)},
         {new RGBPixel(100, 0, 100),
             new RGBPixel(255, 255, 255)}};
 
-    imageRGB = new Image2D(LoPixel, 0, 255);
+    imageRGB = new Image2D(loPixel, 0, 255);
     imageAcadia = ImageReader.createImageFromPPM("src/Acadia.ppm");
   }
 
@@ -126,35 +126,5 @@ public class Image2DTest {
     assertEquals(sameImage.getPixel(0, 0), imageRGB.getPixel(0, 0));
     assertEquals(sameImage.height(), imageRGB.height());
     assertSame(sameImage.getPixels(), imageRGB.getPixels());
-  }
-
-  @Test
-  public void testExportBlurAcadiaPPM() {
-    ImageModel blurredFlowers = new BlurImage().apply(imageAcadia);
-    ExportImage exportFlowers = new ExportImage(blurredFlowers);
-    exportFlowers.makePPM("blurredAcadia.ppm");
-  }
-
-  @Test
-  public void testExportSharpenAcadiaPPM() {
-    ImageModel blurredFlowers = new SharpenImage().apply(imageAcadia);
-    ExportImage exportFlowers = new ExportImage(blurredFlowers);
-    exportFlowers.makePPM("sharpenedAcadia.ppm");
-  }
-
-  @Test
-  public void testExportMuleBlurredPPM() {
-    ImageModel mule = ImageReader.createImageFromPPM("src/muleCropped.ppm");
-    ImageModel blurredMule = new BlurImage().apply(mule);
-    ExportImage exportFlowers = new ExportImage(blurredMule);
-    exportFlowers.makePPM("blurredMule.ppm");
-  }
-
-  @Test
-  public void testExportSharpenedMulePPM() {
-    ImageModel mule = ImageReader.createImageFromPPM("src/muleCropped.ppm");
-    ImageModel sharpenedMule = new SharpenImage().apply(mule);
-    ExportImage exportFlowers = new ExportImage(sharpenedMule);
-    exportFlowers.makePPM("sharpenedMule.ppm");
   }
 }

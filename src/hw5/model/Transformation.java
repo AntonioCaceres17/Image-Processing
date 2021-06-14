@@ -1,4 +1,4 @@
-package HW05.Model;
+package hw5.model;
 
 /**
  * This class represents a transformation to be applied to an image.
@@ -16,6 +16,13 @@ public abstract class Transformation implements IFunction {
     this.colorMatrix = colorMatrix;
   }
 
+  /**
+   * Applies the transformation to the given image.
+   *
+   * @param image The given image to be modified
+   * @return  the new transformed ImageModel
+   * @throws IllegalArgumentException   if the image is invalid.
+   */
   public ImageModel apply(ImageModel image) throws IllegalArgumentException {
     if (image == null || image.getPixels().length == 0) {
       throw new IllegalArgumentException("Image cannot be empty!");
@@ -30,6 +37,7 @@ public abstract class Transformation implements IFunction {
     }
     return image.copyProperties(transformedPixels);
   }
+
   /**
    * This applies the matrix multiplication needed for the color transformation and flattens it to
    * become a 1D array.
@@ -37,9 +45,11 @@ public abstract class Transformation implements IFunction {
    * @param curPixel the Pixel to be multiplied with this matrix
    * @return a modified version of the given Pixel
    */
+
+  // private method to apply the transformation to the given pixel of the image.
   private IPixel applyTransformation(IPixel curPixel, int minValue, int maxValue) {
-    int[]channels = curPixel.getChannels();
-    int[]finalColor = new int[channels.length];
+    int[] channels = curPixel.getChannels();
+    int[] finalColor = new int[channels.length];
 
     for (int i = 0; i < channels.length; i++) {
       double transformedColor = 0;

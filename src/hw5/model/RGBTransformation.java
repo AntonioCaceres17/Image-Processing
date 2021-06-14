@@ -1,4 +1,4 @@
-package HW05.Model;
+package hw5.model;
 
 /**
  * Class for transforming an image made with RGB pixels.

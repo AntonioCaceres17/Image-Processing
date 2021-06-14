@@ -1,4 +1,4 @@
-package HW05.Model;
+package hw5.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -20,13 +20,13 @@ public class SepiaTest extends IFunctionRGBTest {
 
   @Before
   public void initData() {
-    IPixel[][] LoPixel = {
+    IPixel[][] loPixel = {
         {new RGBPixel(100, 100, 100),
             new RGBPixel(50, 50, 50)},
         {new RGBPixel(100, 0, 100),
             new RGBPixel(255, 255, 255)}};
 
-    image = new Image2D( LoPixel,0, 255);
+    image = new Image2D( loPixel,0, 255);
     sepiaImage = createFunction().apply(image);
   }
 

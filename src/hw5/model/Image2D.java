@@ -1,4 +1,4 @@
-package HW05.Model;
+package hw5.model;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -54,9 +54,9 @@ public class Image2D implements ImageModel {
   // throws an error if any pixel has an illegal value.
   private void testPixelValues(IPixel[][] pixels) throws IllegalArgumentException {
     try {
-      for (IPixel[] row: pixels) {
-        for (IPixel pixel: row) {
-          for (Integer channel: pixel.getChannels()) {
+      for (IPixel[] row : pixels) {
+        for (IPixel pixel : row) {
+          for (Integer channel : pixel.getChannels()) {
             try {
               if (channel < minPixelValue || channel > maxPixelValue) {
                 throw new IllegalArgumentException(
@@ -76,11 +76,11 @@ public class Image2D implements ImageModel {
   /**
    * Constructor for ImageModel class used by ImageReader when making ImageModel from a .ppm file.
    *
-   * @param width           the width of the image in number of pixels
-   * @param height          the height of the image in number of pixels
-   * @param minPixelValue   the minimum value allowed for a pixel's channel
-   * @param maxPixelValue   the maximum value allowed for a pixel's channel
-   * @param pixels          image pixels
+   * @param width         the width of the image in number of pixels
+   * @param height        the height of the image in number of pixels
+   * @param minPixelValue the minimum value allowed for a pixel's channel
+   * @param maxPixelValue the maximum value allowed for a pixel's channel
+   * @param pixels        image pixels
    */
   private Image2D(int width, int height, int minPixelValue, int maxPixelValue, IPixel[][] pixels) {
     this.width = width;
@@ -90,11 +90,15 @@ public class Image2D implements ImageModel {
     this.pixels = pixels;
   }
 
+  /**
+   * Static class used to create an image from a given file.
+   */
   public static class ImageReader {
 
     /**
      * This class takes in a PPM file name, searches for it, and stores it into the appropriate
      * ImageModel class.
+     *
      * @param filename the name of the file to be scanned.
      * @return an ImageModel version of the file, ready to be modified
      * @throws IllegalArgumentException if the file is invalid
@@ -105,19 +109,17 @@ public class Image2D implements ImageModel {
 
       try {
         sc = new Scanner(new FileInputStream(filename));
-      }
-      catch (FileNotFoundException e) {
-        throw new IllegalArgumentException("File "+filename+ " not found!");
-      }
-      catch (NullPointerException e) {
+      } catch (FileNotFoundException e) {
+        throw new IllegalArgumentException("File " + filename + " not found!");
+      } catch (NullPointerException e) {
         throw new IllegalArgumentException("File name cannot be null!");
       }
       StringBuilder builder = new StringBuilder();
       //read the file line by line, and populate a string. This will throw away any comment lines
       while (sc.hasNextLine()) {
         String s = sc.nextLine();
-        if (s.charAt(0)!='#') {
-          builder.append(s+System.lineSeparator());
+        if (s.charAt(0) != '#') {
+          builder.append(s + System.lineSeparator());
         }
       }
 
@@ -146,7 +148,7 @@ public class Image2D implements ImageModel {
         }
       }
 
-      return new Image2D(width, height, 0, maxValue,  imagePixels);
+      return new Image2D(width, height, 0, maxValue, imagePixels);
     }
   }
 
