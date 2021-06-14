@@ -1,4 +1,4 @@
-package HW05.Model;
+package hw5.model;
 
 /**
  * This interface represents a pixel. Each pixel holds a RGB value,
@@ -6,7 +6,7 @@ package HW05.Model;
 public interface IPixel {
 
   /**
-   * Gets the channels that make up the color of the pixel
+   * Gets the channels that make up the color of the pixel.
    *
    * @return The specific channel making the color value attributed to this pixel.
    */

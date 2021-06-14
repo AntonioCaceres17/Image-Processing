@@ -1,6 +1,6 @@
-package HW05.Model;
+package hw5.model;
 
-import HW05.Model.Image2D.ImageReader;
+import hw5.model.Image2D.ImageReader;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 

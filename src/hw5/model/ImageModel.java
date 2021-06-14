@@ -1,4 +1,4 @@
-package HW05.Model;
+package hw5.model;
 
 /**
  * This model represents the different actions that can be taken from a given image.

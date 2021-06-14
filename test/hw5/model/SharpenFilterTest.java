@@ -1,4 +1,4 @@
-package HW05.Model;
+package hw5.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

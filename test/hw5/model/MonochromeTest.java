@@ -1,4 +1,4 @@
-package HW05.Model;
+package hw5.model;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 /**
- * Test class for Monochrome transformation
+ * Test class for Monochrome transformation.
  */
 public class MonochromeTest extends IFunctionRGBTest {
 
@@ -20,13 +20,13 @@ public class MonochromeTest extends IFunctionRGBTest {
 
   @Before
   public void initData() {
-    IPixel[][] LoPixel = {
+    IPixel[][] loPixel = {
         {new RGBPixel(100, 75, 50),
             new RGBPixel(50, 50, 50)},
         {new RGBPixel(100, 0, 100),
             new RGBPixel(255, 255, 255)}};
 
-    image = new Image2D( LoPixel,0, 255);
+    image = new Image2D( loPixel,0, 255);
     monochromeImage = createFunction().apply(image);
   }
 

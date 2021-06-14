@@ -1,4 +1,4 @@
-package HW05.Model;
+package hw5.model;
 
 /**
  * Class representing a Monochrome transformation to an image.

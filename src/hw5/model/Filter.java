@@ -1,9 +1,9 @@
-package HW05.Model;
+package hw5.model;
 
 import java.awt.Point;
 
 /**
- * This class represents a general filter to be applied to an image
+ * This class represents a general filter to be applied to an image.
  */
 public abstract class Filter implements IFunction {
 
@@ -31,7 +31,7 @@ public abstract class Filter implements IFunction {
 
     for (int y = 0; y < image.height(); y++) {
       for (int x = 0; x < image.width(); x++) {
-         filteredImage[y][x] = applyFilter(image, x, y);
+        filteredImage[y][x] = applyFilter(image, x, y);
       }
     }
 
@@ -48,8 +48,8 @@ public abstract class Filter implements IFunction {
         for (int x = 0 - kernel.x; x < filter[y + kernel.y].length - kernel.x; x++) {
           if (imageY + y >= 0 && imageY + y < image.height()
               && imageX + x >= 0 && imageX + x < image.width()) {
-            sum += filter[kernel.y + y][kernel.x + x] *
-                image.getPixel(imageX + x, imageY + y).getChannels()[i];
+            sum += filter[kernel.y + y][kernel.x + x]
+                * image.getPixel(imageX + x, imageY + y).getChannels()[i];
           }
         }
       }
@@ -62,7 +62,7 @@ public abstract class Filter implements IFunction {
       }
 
       sumForChannels[i] = (int) sum;
-      }
+    }
 
     return makePixel(sumForChannels);
   }

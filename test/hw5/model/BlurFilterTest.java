@@ -1,4 +1,4 @@
-package HW05.Model;
+package hw5.model;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 /**
- * Test class for the blur filter
+ * Test class for the blur filter.
  */
 public class BlurFilterTest extends IFunctionRGBTest {
 

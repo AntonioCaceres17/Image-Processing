@@ -1,4 +1,4 @@
-package HW05.Model;
+package hw5.model;
 
 import org.junit.Before;
 import org.junit.Test;

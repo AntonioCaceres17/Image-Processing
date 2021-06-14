@@ -1,9 +1,9 @@
-package HW05.Model;
+package hw5.model;
 
 import org.junit.Test;
 
 /**
- * Abstract test class for Image function objects
+ * Abstract test class for Image function objects.
  */
 public abstract class IFunctionRGBTest {
 

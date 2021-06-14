@@ -1,4 +1,4 @@
-package HW05.Model;
+package hw5.model;
 
 import java.io.File;
 import java.io.FileWriter;
