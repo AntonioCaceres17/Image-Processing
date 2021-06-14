@@ -11,7 +11,7 @@ import static org.junit.Assert.assertSame;
  */
 public class Image2DTest {
 
-  private ImageModel imageFlowers;
+  private ImageModel imageAcadia;
   private ImageModel imageRGB;
 
   @Before
@@ -23,18 +23,18 @@ public class Image2DTest {
             new RGBPixel(255, 255, 255)}};
 
     imageRGB = new Image2D(LoPixel, 0, 255);
-    imageFlowers = ImageReader.createImageFromPPM("src/flowers.ppm");
+    imageAcadia = ImageReader.createImageFromPPM("src/Acadia.ppm");
   }
 
   @Test
   public void testStoringValues() {
     //Interprets the dimensions of the image
-    assertEquals(1024, imageFlowers.width());
-    assertEquals(768, imageFlowers.height());
+    assertEquals(1024, imageAcadia.width());
+    assertEquals(768, imageAcadia.height());
 
     // Interprets the max/min value of the image channels
-    assertEquals(255, imageFlowers.maxPixelValue());
-    assertEquals(0, imageFlowers.minPixelValue());
+    assertEquals(255, imageAcadia.maxPixelValue());
+    assertEquals(0, imageAcadia.minPixelValue());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -128,5 +128,33 @@ public class Image2DTest {
     assertSame(sameImage.getPixels(), imageRGB.getPixels());
   }
 
+  @Test
+  public void testExportBlurAcadiaPPM() {
+    ImageModel blurredFlowers = new BlurImage().apply(imageAcadia);
+    ExportImage exportFlowers = new ExportImage(blurredFlowers);
+    exportFlowers.makePPM("blurredAcadia.ppm");
+  }
 
+  @Test
+  public void testExportSharpenAcadiaPPM() {
+    ImageModel blurredFlowers = new SharpenImage().apply(imageAcadia);
+    ExportImage exportFlowers = new ExportImage(blurredFlowers);
+    exportFlowers.makePPM("sharpenedAcadia.ppm");
+  }
+
+  @Test
+  public void testExportMuleBlurredPPM() {
+    ImageModel mule = ImageReader.createImageFromPPM("src/muleCropped.ppm");
+    ImageModel blurredMule = new BlurImage().apply(mule);
+    ExportImage exportFlowers = new ExportImage(blurredMule);
+    exportFlowers.makePPM("blurredMule.ppm");
+  }
+
+  @Test
+  public void testExportSharpenedMulePPM() {
+    ImageModel mule = ImageReader.createImageFromPPM("src/muleCropped.ppm");
+    ImageModel sharpenedMule = new SharpenImage().apply(mule);
+    ExportImage exportFlowers = new ExportImage(sharpenedMule);
+    exportFlowers.makePPM("sharpenedMule.ppm");
+  }
 }
