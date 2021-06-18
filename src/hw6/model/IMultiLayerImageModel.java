@@ -21,7 +21,7 @@ public interface IMultiLayerImageModel {
    *         if the image is null, or if the image is not the same size as the other images
    *         in the model
    */
-  void addLayer(ImageModel image) throws IllegalArgumentException;
+  void addLayer(LayeredImageModel image) throws IllegalArgumentException;
 
   /**
    * Sets the image at the given layer to be the current image. The bottom most layer is layer
