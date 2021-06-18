@@ -2,20 +2,22 @@ package hw6.controller;
 
 import hw5.model.ImageModel;
 import hw6.model.MultiLayerImage;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.function.Function;
 
 
 /** T
  * This class is able to take in batch commands to either load, edit, or save images
  * This is able to support both interactive or file-based scripting
  */
-public class ImageCommand implements ImageController{
+public class ImageCommand implements ImageController {
 
 private MultiLayerImage model;
 private Readable rd;
 private Appendable ap;
-
+private Map<String, Function<Scanner, Void>> commands;
 
 public ImageCommand(MultiLayerImage model, Readable rd, Appendable ap)
     throws IllegalArgumentException {
