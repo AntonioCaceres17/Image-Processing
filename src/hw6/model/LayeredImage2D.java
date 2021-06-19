@@ -24,12 +24,12 @@ public class LayeredImage2D implements LayeredImageModel  {
 
   @Override
   public boolean isVisible() {
-    return false;
+    return isVisible;
   }
 
   @Override
   public String name() {
-    return null;
+    return this.name;
   }
 
   @Override
