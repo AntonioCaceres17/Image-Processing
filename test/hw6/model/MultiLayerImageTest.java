@@ -212,4 +212,9 @@ public class MultiLayerImageTest {
     model.apply(new Monochrome());
     assertEquals(new Monochrome().apply(image), layer.getImage());
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetTopNoLayers() {
+    model.getTop();
+  }
 }
