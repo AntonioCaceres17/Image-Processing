@@ -13,7 +13,6 @@ import hw5.model.SharpenImage;
 import hw6.model.IMultiLayerImageModel;
 import hw6.model.LayeredImage2D;
 import hw6.model.LayeredImageModel;
-import hw6.model.MultiLayerImage;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -23,9 +22,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import javax.imageio.ImageIO;
-
 
 /**
  * T This class is able to take in batch commands to either load, edit, or save images This is able
