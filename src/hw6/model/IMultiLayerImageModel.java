@@ -62,6 +62,16 @@ public interface IMultiLayerImageModel {
   ImageModel apply(IFunction function) throws IllegalArgumentException;
 
   /**
+   * Returns the image at the topmost visible layer. If there are no layers or all the layers
+   * are set to invisible it throws an exception.
+   *
+   * @return top image
+   * @throws IllegalArgumentException
+   *         if there are no layers or if all the layers are set to not visible.
+   */
+  ImageModel getTop() throws IllegalArgumentException;
+
+  /**
    * Returns the number of layers in the multi layered image.
    *
    * @return number of image layers

@@ -71,6 +71,19 @@ public class MultiLayerImage implements IMultiLayerImageModel {
     return layers.set(currentLayer, newImage).getImage();
   }
 
+  @Override
+  public ImageModel getTop() throws IllegalArgumentException {
+    if (layers.isEmpty()) {
+      throw new IllegalArgumentException("Image has no layers.");
+    }
+    for (int i = layers.size() - 1; i >= 0; i--) {
+      if (layers.get(i).isVisible()) {
+        return layers.get(i).getImage();
+      }
+    }
+    throw new IllegalArgumentException("Image has no visible layers.");
+  }
+
   public int numLayers() {
     return layers.size();
   }
