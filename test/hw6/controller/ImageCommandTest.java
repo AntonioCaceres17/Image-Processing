@@ -58,8 +58,18 @@ public class ImageCommandTest {
   }
 
   @Test
+  public void testImportPNG() {
+    Readable rd = new StringReader("import res/Acadia.png");
+    Appendable ap = new StringBuilder();
+    IMultiLayerImageModel model = new MultiLayerImage();
+    ImageController controller = new ImageCommand(model, rd, ap);
+    controller.read();
+    assertEquals(1, model.numLayers());
+  }
+
+  @Test
   public void testImportPPM() {
-    Readable rd = new StringReader("import src/Acadia.JPG");
+    Readable rd = new StringReader("import src/Acadia.ppm");
     Appendable ap = new StringBuilder();
     IMultiLayerImageModel model = new MockMultiLayerImage(ap);
     ImageController controller = new ImageCommand(model, rd, ap);
@@ -196,4 +206,27 @@ public class ImageCommandTest {
   }
 
   //TODO: test export
+  @Test
+  public void testExportPPM() {
+    Readable rd = new StringReader("import res/Acadia.png\n"
+        + "export res/Acadia.ppm");
+    Appendable ap = new StringBuilder();
+    IMultiLayerImageModel model = new MockMultiLayerImage(ap);
+    ImageController controller = new ImageCommand(model, rd, ap);
+    controller.read();
+    assertEquals("Add layer: res/Acadia.png\n"
+        + "return top layer.\n", ap.toString());
+  }
+
+  @Test
+  public void testExportPNG() {
+    Readable rd = new StringReader("import res/Acadia.png\n"
+        + "export res/Acadia.png");
+    Appendable ap = new StringBuilder();
+    IMultiLayerImageModel model = new MockMultiLayerImage(ap);
+    ImageController controller = new ImageCommand(model, rd, ap);
+    controller.read();
+    assertEquals("Add layer: res/Acadia.png\n"
+        + "return top layer.\n", ap.toString());
+  }
 }

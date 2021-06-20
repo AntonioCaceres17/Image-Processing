@@ -151,7 +151,7 @@ public class ImageCommand implements ImageController {
     try {
       String imageType = s.next();
       ExportImage exp = new ExportImage(model.getTop());
-      if (imageType.contains(".jpeg")) {
+      if (imageType.contains(".jpeg") || imageType.contains(".jpg")) {
         exp.makeImage(imageType, "jpeg");
       } else if (imageType.contains(".png")) {
         exp.makeImage(imageType, "png");
