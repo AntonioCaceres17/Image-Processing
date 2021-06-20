@@ -4,7 +4,10 @@ import hw5.model.BlurImage;
 import hw5.model.IPixel;
 import hw5.model.Image2D;
 import hw5.model.ImageModel;
+import hw5.model.Monochrome;
 import hw5.model.RGBPixel;
+import hw5.model.Sepia;
+import hw5.model.SharpenImage;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -162,5 +165,51 @@ public class MultiLayerImageTest {
     model.apply(new BlurImage());
   }
 
-  //TODO: Test apply method and then test the controller using MockModel.
+  @Test
+  public void testApplyBlurFunction() {
+    ImageModel image = new Image2D(
+        new IPixel[][]{
+            {new RGBPixel(0,0,0)}},
+        0, 255);
+    LayeredImageModel layer = new LayeredImage2D("", true, image);
+    model.addLayer(layer);
+    model.apply(new BlurImage());
+    assertEquals(new BlurImage().apply(image), layer.getImage());
+  }
+
+  @Test
+  public void testApplySharpenFunction() {
+    ImageModel image = new Image2D(
+        new IPixel[][]{
+            {new RGBPixel(0,0,0)}},
+        0, 255);
+    LayeredImageModel layer = new LayeredImage2D("", true, image);
+    model.addLayer(layer);
+    model.apply(new SharpenImage());
+    assertEquals(new SharpenImage().apply(image), layer.getImage());
+  }
+
+  @Test
+  public void testApplySepiaFunction() {
+    ImageModel image = new Image2D(
+        new IPixel[][]{
+            {new RGBPixel(0,0,0)}},
+        0, 255);
+    LayeredImageModel layer = new LayeredImage2D("", true, image);
+    model.addLayer(layer);
+    model.apply(new Sepia());
+    assertEquals(new Sepia().apply(image), layer.getImage());
+  }
+
+  @Test
+  public void testApplyGrayscaleFunction() {
+    ImageModel image = new Image2D(
+        new IPixel[][]{
+            {new RGBPixel(0,0,0)}},
+        0, 255);
+    LayeredImageModel layer = new LayeredImage2D("", true, image);
+    model.addLayer(layer);
+    model.apply(new Monochrome());
+    assertEquals(new Monochrome().apply(image), layer.getImage());
+  }
 }
