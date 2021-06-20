@@ -4,10 +4,19 @@ import hw5.model.IFunction;
 import hw5.model.ImageModel;
 import java.io.IOException;
 
+/**
+ * Mock class for MultiLayerImage. This class is used to test that the controller passes in the
+ * correct values to the model's functions when each method is called through the controller.
+ */
 public class MockMultiLayerImage implements IMultiLayerImageModel {
 
   private final Appendable ap;
 
+  /**
+   * Constructor for the MockMultiLayerImage class.
+   *
+   * @param ap  Appendable object to write to
+   */
   public MockMultiLayerImage(Appendable ap) {
     this.ap = ap;
   }
@@ -51,7 +60,7 @@ public class MockMultiLayerImage implements IMultiLayerImageModel {
   @Override
   public ImageModel apply(IFunction function) throws IllegalArgumentException {
     try {
-      ap.append("apply function: " + function.getClass().getName() + "\n");
+      ap.append("apply function: " + function.getClass().getSimpleName() + "\n");
     } catch (IOException e) {
       throw new IllegalArgumentException("Could not write to appendable.");
     }

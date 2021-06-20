@@ -4,11 +4,21 @@ import hw5.model.IFunction;
 import hw5.model.ImageModel;
 import java.util.Stack;
 
+/**
+ * This class represents an image with more than one layer. This is is able to have only one or no
+ * layers but is also able to have multiple layers. The model is used by setting a layer to be
+ * the current layer then applying a modification to that layer. Layers can also be swapped and
+ * each layer's visibility can be turned on or off. Each layer has the same dimensions.
+ * When a multi-layered image is exported, the topmost visible layer is exported.
+ */
 public class MultiLayerImage implements IMultiLayerImageModel {
 
   private Stack<LayeredImageModel> layers;
   private int currentLayer;
 
+  /**
+   * Constructor for MultiLayerImage class.
+   */
   public MultiLayerImage() {
     this.layers = new Stack<>();
     this.currentLayer = -1;

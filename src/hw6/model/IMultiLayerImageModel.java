@@ -29,7 +29,7 @@ public interface IMultiLayerImageModel {
    *
    * @param i the index of the new current layer
    * @throws IllegalArgumentException
-   *         if the given index is out of bounds.
+   *         if the given index is out of bounds
    */
   void setCurrent(int i) throws IllegalArgumentException;
 

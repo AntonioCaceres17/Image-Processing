@@ -36,11 +36,23 @@ public class ImageCommand implements ImageController {
   private Map<String, IFunction> singleImageCommands;
   private Map<String, Consumer<Scanner>> multiLayerImageCommands;
 
+  /**
+   * Constructor for the ImageCommand class.
+   *
+   * @param model model controller passes inputs to
+   * @param rd    readable with the client commands
+   * @param ap    appendable to write to a view
+   * @throws IllegalArgumentException
+   */
   public ImageCommand(IMultiLayerImageModel model, Readable rd, Appendable ap)
       throws IllegalArgumentException {
-    Objects.requireNonNull(model, "Model cannot be null!");
-    Objects.requireNonNull(rd, "Readable cannot be null!");
-    Objects.requireNonNull(ap, "Appendable cannot be null!");
+    try {
+      Objects.requireNonNull(model, "Model cannot be null!");
+      Objects.requireNonNull(rd, "Readable cannot be null!");
+      Objects.requireNonNull(ap, "Appendable cannot be null!");
+    } catch (NullPointerException npe) {
+      throw new IllegalArgumentException(npe.getMessage());
+    }
 
     this.model = model;
     this.rd = rd;
@@ -106,6 +118,7 @@ public class ImageCommand implements ImageController {
     }
   }
 
+  @Override
   public void read() {
     Scanner in = new Scanner(rd);
     while (in.hasNextLine()) {
@@ -113,6 +126,7 @@ public class ImageCommand implements ImageController {
     }
   }
 
+  // reads a single command. Each command should be on its own line
   private void readLine(String rd) throws IllegalStateException, IllegalArgumentException {
     Scanner in = new Scanner(rd);
     if (!in.hasNext()) {
