@@ -16,17 +16,26 @@ public class MultiLayerImage implements IMultiLayerImageModel {
 
   @Override
   public void addLayer(LayeredImageModel layer) throws IllegalArgumentException {
+    if (layer == null) {
+      throw new IllegalArgumentException("Cannot add null layer.");
+    }
     //TODO: figure out how we are going to deal with names since we will only be taking in images from JPEG, PNG, PPM
-    this.layers.push(layer);
-    this.currentLayer++;
+    if (layers.isEmpty()
+        || layer.getImage().width() == layers.peek().getImage().width()
+        && layer.getImage().height() == layers.peek().getImage().height()) {
+      this.layers.push(layer);
+      this.currentLayer++;
+    } else {
+      throw new IllegalArgumentException("Image layers must have the same size.");
+    }
   }
 
   @Override
   public void setCurrent(int i) throws IllegalArgumentException {
-    if (i < 1 || i > layers.size()) {
+    if (i < 0 || i >= layers.size()) {
       throw new IllegalArgumentException("Invalid layer index: " + i);
     }
-    currentLayer = i - 1;
+    currentLayer = i;
   }
 
   @Override
@@ -39,10 +48,10 @@ public class MultiLayerImage implements IMultiLayerImageModel {
 
   @Override
   public void swapLayers(int l1, int l2) throws IllegalArgumentException {
-    if (l1 < 1 || l1 > layers.size()) {
+    if (l1 < 0 || l1 >= layers.size()) {
       throw new IllegalArgumentException("Invalid layer index: " + l1);
     }
-    if ( l2 < 1 || l2 > layers.size()) {
+    if ( l2 < 0 || l2 >= layers.size()) {
       throw new IllegalArgumentException("Invalid layer index: " + l2);
     }
     LayeredImageModel temp = layers.set(l1, layers.get(l2));
@@ -52,6 +61,9 @@ public class MultiLayerImage implements IMultiLayerImageModel {
   // This currently sets the layer edited to automatically be visible
   @Override
   public ImageModel apply(IFunction function) throws IllegalArgumentException {
+    if (function == null) {
+      throw new IllegalArgumentException("IFunction object cannot be null.");
+    }
     if (layers.size() == 0) {
       throw new IllegalArgumentException("The image has no current layer.");
     }
@@ -65,6 +77,9 @@ public class MultiLayerImage implements IMultiLayerImageModel {
 
   @Override
   public String layerName() {
+    if (layers.isEmpty()) {
+      throw new IllegalArgumentException("Image has no layers.");
+    }
     return this.layers.get(currentLayer).name();
   }
 }

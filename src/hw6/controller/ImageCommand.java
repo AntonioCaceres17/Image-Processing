@@ -92,7 +92,7 @@ public class ImageCommand implements ImageController {
 
   private void current(Scanner s) throws IllegalArgumentException {
     try {
-      int newCurrent = s.nextInt();
+      int newCurrent = s.nextInt() - 1;
       model.setCurrent(newCurrent);
     } catch (InputMismatchException e) {
       throw new IllegalArgumentException("Argument after current must of type int.");
@@ -101,8 +101,8 @@ public class ImageCommand implements ImageController {
 
   private void swap(Scanner s) throws IllegalArgumentException {
     try {
-      int layer1 = s.nextInt();
-      int layer2 = s.nextInt();
+      int layer1 = s.nextInt() - 1;
+      int layer2 = s.nextInt() - 1;
       model.swapLayers(layer1, layer2);
     } catch (InputMismatchException e) {
       throw new IllegalArgumentException("Arguments after swap must be of type int, int.");

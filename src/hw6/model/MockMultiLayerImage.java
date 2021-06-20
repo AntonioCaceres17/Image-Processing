@@ -41,7 +41,11 @@ public class MockMultiLayerImage implements IMultiLayerImageModel {
 
   @Override
   public void swapLayers(int l1, int l2) throws IllegalArgumentException {
-
+    try {
+      ap.append("swapped layers " + l1 + " and " + l2);
+    } catch (IOException e) {
+      throw new IllegalArgumentException("Could not write to appendable.");
+    }
   }
 
   @Override
