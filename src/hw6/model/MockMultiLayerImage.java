@@ -8,14 +8,14 @@ public class MockMultiLayerImage implements IMultiLayerImageModel {
 
   private final Appendable ap;
 
-  private MockMultiLayerImage(Appendable ap) {
+  public MockMultiLayerImage(Appendable ap) {
     this.ap = ap;
   }
 
   @Override
   public void addLayer(LayeredImageModel image) throws IllegalArgumentException {
     try {
-      ap.append("Add layer: " + image.name());
+      ap.append("Add layer: " + image.name() + "\n");
     } catch (IOException e) {
       throw new IllegalArgumentException("Could not write to appendable.");
     }
@@ -24,7 +24,7 @@ public class MockMultiLayerImage implements IMultiLayerImageModel {
   @Override
   public void setCurrent(int i) throws IllegalArgumentException {
     try {
-      ap.append("set current to: " + i);
+      ap.append("set current to: " + i + "\n");
     } catch (IOException e) {
       throw new IllegalArgumentException("Could not write to appendable.");
     }
@@ -33,7 +33,7 @@ public class MockMultiLayerImage implements IMultiLayerImageModel {
   @Override
   public void toggleVisibility() throws IllegalArgumentException {
     try {
-      ap.append("toggle visibility");
+      ap.append("toggle visibility\n");
     } catch (IOException e) {
     throw new IllegalArgumentException("Could not write to appendable.");
     }
@@ -42,7 +42,7 @@ public class MockMultiLayerImage implements IMultiLayerImageModel {
   @Override
   public void swapLayers(int l1, int l2) throws IllegalArgumentException {
     try {
-      ap.append("swapped layers " + l1 + " and " + l2);
+      ap.append("swap layers " + l1 + " and " + l2 + "\n");
     } catch (IOException e) {
       throw new IllegalArgumentException("Could not write to appendable.");
     }
@@ -51,7 +51,7 @@ public class MockMultiLayerImage implements IMultiLayerImageModel {
   @Override
   public ImageModel apply(IFunction function) throws IllegalArgumentException {
     try {
-      ap.append("apply function: " + function.getClass().getName());
+      ap.append("apply function: " + function.getClass().getName() + "\n");
     } catch (IOException e) {
       throw new IllegalArgumentException("Could not write to appendable.");
     }
@@ -61,7 +61,7 @@ public class MockMultiLayerImage implements IMultiLayerImageModel {
   @Override
   public int numLayers() {
     try {
-      ap.append("num layers");
+      ap.append("num layers\n");
     } catch (IOException e) {
       throw new IllegalArgumentException("Could not write to appendable.");
     }
@@ -71,7 +71,7 @@ public class MockMultiLayerImage implements IMultiLayerImageModel {
   @Override
   public String layerName() {
     try {
-      ap.append("layer name");
+      ap.append("layer name\n");
     } catch (IOException e) {
       throw new IllegalArgumentException("Could not write to appendable.");
     }    return null;
