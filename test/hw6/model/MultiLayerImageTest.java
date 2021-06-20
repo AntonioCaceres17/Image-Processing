@@ -217,4 +217,39 @@ public class MultiLayerImageTest {
   public void testGetTopNoLayers() {
     model.getTop();
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetTopAllLayersNotVisible() {
+    model.addLayer(new LayeredImage2D("l1", true,
+        new Image2D(new IPixel[][]{{new RGBPixel(0,0,0)}}, 0, 255)));
+    model.addLayer(new LayeredImage2D("l2", true,
+        new Image2D(new IPixel[][]{{new RGBPixel(0,0,0)}}, 0, 255)));
+    model.toggleVisibility();
+    model.setCurrent(0);
+    model.toggleVisibility();
+    model.getTop();
+  }
+
+  @Test
+  public void testGetTopLayerTopIsVisible() {
+    LayeredImageModel l1 = new LayeredImage2D("l1", true,
+        new Image2D(new IPixel[][]{{new RGBPixel(0,0,0)}}, 0, 255));
+    LayeredImageModel l2 = new LayeredImage2D("l2", true,
+        new Image2D(new IPixel[][]{{new RGBPixel(0,0,0)}}, 0, 255));
+    model.addLayer(l1);
+    model.addLayer(l2);
+    assertEquals(l2.getImage(), model.getTop());
+  }
+
+  @Test
+  public void testGetTopLayerTopIsNotVisible() {
+    LayeredImageModel l1 = new LayeredImage2D("l1", true,
+        new Image2D(new IPixel[][]{{new RGBPixel(0,0,0)}}, 0, 255));
+    LayeredImageModel l2 = new LayeredImage2D("l2", true,
+        new Image2D(new IPixel[][]{{new RGBPixel(0,0,0)}}, 0, 255));
+    model.addLayer(l1);
+    model.toggleVisibility();
+    model.addLayer(l2);
+    assertEquals(l1.getImage(), model.getTop());
+  }
 }
