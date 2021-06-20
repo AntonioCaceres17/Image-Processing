@@ -17,4 +17,5 @@ public interface ImageController {
   //  for design... Views should still have a .render message file
   // With try-catch mania......
 
+  void read() throws IllegalStateException, IllegalArgumentException;
 }

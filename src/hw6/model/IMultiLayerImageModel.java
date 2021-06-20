@@ -61,12 +61,17 @@ public interface IMultiLayerImageModel {
    */
   ImageModel apply(IFunction function) throws IllegalArgumentException;
 
-  //TODO: Im not fully sure what this method is supposed to do.
   /**
-   * Exports the MultilayerImageModel
+   * Returns the number of layers in the multi layered image.
    *
-   * @throws IllegalArgumentException
-   *         if it cant export it properly
+   * @return number of image layers
    */
-  void exportImage() throws IllegalArgumentException;
+  int numLayers();
+
+  /**
+   * Returns the name of the current layer.
+   *
+   * @return name of the current layer
+   */
+  String layerName();
 }

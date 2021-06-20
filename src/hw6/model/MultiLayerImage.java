@@ -17,7 +17,8 @@ public class MultiLayerImage implements IMultiLayerImageModel {
   @Override
   public void addLayer(LayeredImageModel layer) throws IllegalArgumentException {
     //TODO: figure out how we are going to deal with names since we will only be taking in images from JPEG, PNG, PPM
-    this.layers.add(layer);
+    this.layers.push(layer);
+    this.currentLayer++;
   }
 
   @Override
@@ -58,8 +59,12 @@ public class MultiLayerImage implements IMultiLayerImageModel {
     return layers.set(currentLayer, newImage).getImage();
   }
 
-  @Override
-  public void exportImage() throws IllegalArgumentException {
+  public int numLayers() {
+    return layers.size();
+  }
 
+  @Override
+  public String layerName() {
+    return this.layers.get(currentLayer).name();
   }
 }
