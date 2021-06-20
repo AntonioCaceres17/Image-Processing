@@ -1,6 +1,7 @@
 package hw6.controller;
 
 import hw5.model.BlurImage;
+import hw6.model.ExportImage;
 import hw5.model.IFunction;
 import hw5.model.IPixel;
 import hw5.model.Image2D;
@@ -69,6 +70,7 @@ public class ImageCommand implements ImageController {
     multiLayerImageCommands.put("current", s -> current(s));
     multiLayerImageCommands.put("toggle", s -> this.model.toggleVisibility());
     multiLayerImageCommands.put("swap", s -> swap(s));
+    multiLayerImageCommands.put("export", s -> export(s));
   }
 
   private void readImage(Scanner s) throws IllegalArgumentException {
@@ -142,6 +144,24 @@ public class ImageCommand implements ImageController {
       multiLayerImageCommands.get(nxt).accept(in);
     } else {
       throw new IllegalArgumentException("Command " + nxt + " not found.");
+    }
+  }
+
+  private void export(Scanner s) throws IllegalArgumentException {
+    try {
+      String imageType = s.next();
+      ExportImage exp = new ExportImage(model.getTop());
+      if (imageType.contains(".jpeg")) {
+        exp.makeImage(imageType, "jpeg");
+      } else if (imageType.contains(".png")) {
+        exp.makeImage(imageType, "png");
+      } else if (imageType.contains(".ppm")) {
+        exp.makePPM(imageType);
+      } else {
+        throw new IllegalArgumentException("Invalid File Extension!");
+      }
+    }catch (InputMismatchException e) {
+      throw new IllegalArgumentException("Arguments after export must be of type String.");
     }
   }
 }
