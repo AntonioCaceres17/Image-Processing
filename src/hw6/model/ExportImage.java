@@ -1,13 +1,17 @@
-package hw5.model;
+package hw6.model;
 
+import hw5.model.IPixel;
+import hw5.model.ImageModel;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  * This class exports an ImageModel to the desired type of image file.
  */
-public class ExportImage {
+public class ExportImage implements IExportImage {
 
   private ImageModel image;
 
@@ -20,13 +24,10 @@ public class ExportImage {
     this.image = image;
   }
 
-  /**
-   * Writes and creates a PPM file of the ImageModel, abiding by the format rules.
-   * @param filename the desired name of the file to be written and exported
-   * @throws IllegalArgumentException if the Image or filename is invalid
-   */
+
+  @Override
   public void makePPM(String filename) throws IllegalArgumentException {
-    if (image.getPixels().length ==  0 || filename == null) {
+    if (image.getPixels().length == 0 || filename == null) {
       throw new IllegalArgumentException("Image or Filename is invalid!");
     }
     if (!filename.endsWith(".ppm")) {
@@ -59,7 +60,36 @@ public class ExportImage {
       }
       writer.close();
     } catch (IOException e) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Could not create PPM File.");
+    }
+  }
+
+  @Override
+  public void makeImage(String filename, String imageFormat) throws IllegalArgumentException {
+    if (image.getPixels().length == 0 || filename == null) {
+      throw new IllegalArgumentException("Image or Filename is invalid!");
+    }
+    if (!filename.endsWith(".jpeg")) {
+      throw new IllegalArgumentException("Filename must end with .ppm");
+    }
+    File fileJPEG = new File(filename);
+    try {
+      IPixel[][] pixels = image.getPixels();
+      BufferedImage img = new BufferedImage(image.width(), image.height(),
+          BufferedImage.TYPE_INT_ARGB);
+      for (int y = 0; y < pixels.length; y++) {
+        for (int x = 0; x < pixels[y].length; x++) {
+          IPixel thisPixel = pixels[x][y];
+          int rgb = thisPixel.getRed();
+          rgb = (rgb << 8) + thisPixel.getGreen();
+          //TODO: Put this in the pixel class (GetRGB)....
+          rgb = (rgb << 8) + thisPixel.getBlue();
+          img.setRGB(x, y, rgb);
+        }
+      }
+      ImageIO.write(img, imageFormat, fileJPEG);
+    } catch (IOException e) {
+      throw new IllegalArgumentException("Could not create JPEG File.");
     }
   }
 }

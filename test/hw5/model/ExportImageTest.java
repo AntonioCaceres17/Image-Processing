@@ -1,6 +1,7 @@
 package hw5.model;
 
 import hw5.model.Image2D.ImageReader;
+import hw6.model.ExportImage;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
