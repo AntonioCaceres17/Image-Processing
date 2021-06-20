@@ -54,7 +54,11 @@ public class LayeredImage2D implements LayeredImageModel  {
   }
 
   @Override
-  public LayeredImageModel apply(IFunction function) {
+  public LayeredImageModel apply(IFunction function) throws IllegalArgumentException {
+    if (function == null) {
+      throw new IllegalArgumentException("Function is null.");
+    }
+
     // THIS MIGHT ALIAS WILL HAVE TO TEST THIS
     LayeredImageModel oldImage = new LayeredImage2D(this.name, this.isVisible, this.image);
     this.image = function.apply(this.image);

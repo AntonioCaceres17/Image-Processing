@@ -10,7 +10,7 @@ public interface LayeredImageModel {
 
   /**
    * Returns a boolean value representing whether the layer is visible or not. True = visible,
-   * False = not visible.
+   * false = not visible.
    *
    * @return whether the layer is visible or not.
    */
@@ -40,6 +40,7 @@ public interface LayeredImageModel {
    *
    * @param function function to apply to the image
    * @return the old image
+   * @throws IllegalArgumentException if the function is null
    */
-  LayeredImageModel apply(IFunction function);
+  LayeredImageModel apply(IFunction function) throws IllegalArgumentException;
 }
