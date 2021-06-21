@@ -1,0 +1,7 @@
+import res/Acadia.png
+import res/Acadia.ppm
+current 1
+toggle
+blur
+sepia
+export newAcadia.jpeg
