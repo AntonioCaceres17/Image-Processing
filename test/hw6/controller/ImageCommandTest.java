@@ -211,11 +211,10 @@ public class ImageCommandTest {
     Readable rd = new StringReader("import res/Acadia.png\n"
         + "export res/Acadia.ppm");
     Appendable ap = new StringBuilder();
-    IMultiLayerImageModel model = new MockMultiLayerImage(ap);
+    IMultiLayerImageModel model = new MultiLayerImage();
     ImageController controller = new ImageCommand(model, rd, ap);
     controller.read();
-    assertEquals("Add layer: res/Acadia.png\n"
-        + "return top layer.\n", ap.toString());
+    assertEquals("", ap.toString());
   }
 
   @Test
@@ -223,11 +222,10 @@ public class ImageCommandTest {
     Readable rd = new StringReader("import res/Acadia.png\n"
         + "export res/Acadia.png");
     Appendable ap = new StringBuilder();
-    IMultiLayerImageModel model = new MockMultiLayerImage(ap);
+    IMultiLayerImageModel model = new MultiLayerImage();
     ImageController controller = new ImageCommand(model, rd, ap);
     controller.read();
-    assertEquals("Add layer: res/Acadia.png\n"
-        + "return top layer.\n", ap.toString());
+    assertEquals("", ap.toString());
   }
 
   @Test
@@ -238,7 +236,6 @@ public class ImageCommandTest {
     IMultiLayerImageModel model = new MultiLayerImage();
     ImageController controller = new ImageCommand(model, rd, ap);
     controller.read();
-    assertEquals("Add layer: res/Acadia.png\n"
-        + "return top layer.\n", ap.toString());
+    assertEquals("", ap.toString());
   }
 }

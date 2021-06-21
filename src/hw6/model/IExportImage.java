@@ -2,6 +2,9 @@ package hw6.model;
 
 import java.io.IOException;
 
+/**
+ * This interface contains methods for a class that can export images as ppm, png, and jpeg files.
+ */
 public interface IExportImage {
 
   /**

@@ -83,7 +83,7 @@ public class ExportImage implements IExportImage {
           BufferedImage.TYPE_INT_ARGB);
       for (int y = 0; y < pixels.length; y++) {
         for (int x = 0; x < pixels[y].length; x++) {
-          IPixel thisPixel = pixels[x][y];
+          IPixel thisPixel = pixels[y][x];
           int rgb = thisPixel.getRed();
           rgb = (rgb << 8) + thisPixel.getGreen();
           //TODO: Put this in the pixel class (GetRGB)....
