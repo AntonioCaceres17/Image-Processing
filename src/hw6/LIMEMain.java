@@ -6,6 +6,10 @@ import hw6.model.IMultiLayerImageModel;
 
 
 import hw6.model.MultiLayerImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 
 /**
@@ -16,9 +20,21 @@ public class LIMEMain {
 
   public static void main(String[] args) {
     IMultiLayerImageModel model = new MultiLayerImage();
-    InputStreamReader rd = new InputStreamReader(System.in);
-    ImageController controller = new ImageCommand(model, rd, System.out);
+    try {
+      Readable rd = new FileReader("res/script1.txt");
+      ImageController controller = new ImageCommand(model, rd, System.out);
+      controller.read();
+    } catch (FileNotFoundException e) {
+      throw new IllegalArgumentException("File not found.");
+    }
 
+    IMultiLayerImageModel model2 = new MultiLayerImage();
+    try {
+      Readable rd = new FileReader("res/script2.txt");
+      ImageController controller = new ImageCommand(model2, rd, System.out);
+      controller.read();
+    } catch (FileNotFoundException e) {
+      throw new IllegalArgumentException("File not found.");
     }
   }
-
+}
