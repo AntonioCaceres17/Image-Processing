@@ -16,7 +16,7 @@ public class ImageCommandTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testNullModel() {
-    Readable rd = new StringReader("import src/Acadia.JPG");
+    Readable rd = new StringReader("import src/Acadia.jpg");
     Appendable ap = new StringBuilder();
     IMultiLayerImageModel model = new MultiLayerImage();
     ImageController controller = new ImageCommand(null, rd, ap);
@@ -24,7 +24,7 @@ public class ImageCommandTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testNullReadable() {
-    Readable rd = new StringReader("import src/Acadia.JPG");
+    Readable rd = new StringReader("import src/Acadia.jpg");
     Appendable ap = new StringBuilder();
     IMultiLayerImageModel model = new MultiLayerImage();
     ImageController controller = new ImageCommand(model, null, ap);
@@ -32,7 +32,7 @@ public class ImageCommandTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testNullAppendable() {
-    Readable rd = new StringReader("import src/Acadia.JPG");
+    Readable rd = new StringReader("import src/Acadia.jpg");
     Appendable ap = new StringBuilder();
     IMultiLayerImageModel model = new MultiLayerImage();
     ImageController controller = new ImageCommand(model, rd, null);
@@ -40,7 +40,7 @@ public class ImageCommandTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidCommand() {
-    Readable rd = new StringReader("port src/Acadia.JPG");
+    Readable rd = new StringReader("port src/Acadia.jpg");
     Appendable ap = new StringBuilder();
     IMultiLayerImageModel model = new MultiLayerImage();
     ImageController controller = new ImageCommand(model, rd, ap);
@@ -49,7 +49,7 @@ public class ImageCommandTest {
 
   @Test
   public void testImportJPG() {
-    Readable rd = new StringReader("import src/Acadia.JPG");
+    Readable rd = new StringReader("import src/Acadia.jpg");
     Appendable ap = new StringBuilder();
     IMultiLayerImageModel model = new MultiLayerImage();
     ImageController controller = new ImageCommand(model, rd, ap);
@@ -79,7 +79,7 @@ public class ImageCommandTest {
 
   @Test
   public void testCommentAtFirstChar() {
-    Readable rd = new StringReader("#import src/Acadia.JPG");
+    Readable rd = new StringReader("#import src/Acadia.jpg");
     Appendable ap = new StringBuilder();
     IMultiLayerImageModel model = new MockMultiLayerImage(ap);
     ImageController controller = new ImageCommand(model, rd, ap);
@@ -89,13 +89,13 @@ public class ImageCommandTest {
 
   @Test
   public void testAdd2Layers() {
-    Readable rd = new StringReader("import src/Acadia.JPG\n"
+    Readable rd = new StringReader("import src/Acadia.jpg\n"
         + "import src/Acadia.ppm\n");
     Appendable ap = new StringBuilder();
     IMultiLayerImageModel model = new MockMultiLayerImage(ap);
     ImageController controller = new ImageCommand(model, rd, ap);
     controller.read();
-    assertEquals("Add layer: src/Acadia.JPG\n"
+    assertEquals("Add layer: src/Acadia.jpg\n"
         + "Add layer: src/Acadia.ppm\n", ap.toString());
   }
 

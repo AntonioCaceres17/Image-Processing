@@ -39,7 +39,7 @@ public class ExportImageTest {
 
   @Test
   public void testExportToJPEG() {
-    Readable rd = new StringReader("import src/Acadia.JPG");
+    Readable rd = new StringReader("import src/Acadia.jpg");
     Appendable ap = new StringBuilder();
     IMultiLayerImageModel model = new MultiLayerImage();
     ImageController control = new ImageCommand(model, rd,ap);

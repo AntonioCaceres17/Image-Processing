@@ -1,0 +1,9 @@
+import Acadia.png
+import Acadia.jpg
+sharpen
+swap 1 2
+grayscale
+toggle
+export AcadiaSharp.ppm
+toggle
+export AcadiaGray.png
