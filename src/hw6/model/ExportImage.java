@@ -96,7 +96,7 @@ public class ExportImage implements IExportImage {
       }
       ImageIO.write(img, imageFormat, fileJPEG);
     } catch (IOException e) {
-      throw new IllegalArgumentException("Could not create JPEG File.");
+      throw new IllegalArgumentException("Could not create " + imageFormat + " File.");
     }
   }
 }
