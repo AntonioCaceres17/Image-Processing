@@ -53,6 +53,42 @@ SHARPENIMAGE
 
 SharpenImage extends RGBFilter and is a function object that sharpens the given image when the user calls apply and passes in a valid imagemodel.
 
+IMAGECONTROLLER
+
+Image controller is the interface for a controller for a multi-layered imade model. This controller lets the client read from a readable, where each line in the readable has its own command.
+
+IMAGECOMMAND
+
+ImageCommand is the class that implements the ImageController interface. This class implements the read method so that each line in the readable is its own command. Read throws an error if an invalid input is given. This class is the only one that communicates with the model.
+
+LAYEREDIMAGEMODEL
+
+LayeredImageModel is an interface for a an image that represents a layer in a multi-layered image. This interface adapts an image and gives it the ability to toggle its visibility and take on a name for the image.
+
+LAYEREDIMAGE2D
+
+LayeredImage2D implements LayeredImageModel. LayeredImage2D is a class that is an adapter to Image2D and offers the functionality of toggling the image's visibility and giving it a name.
+
+IMULTILAYERIMAGEMODEL
+
+IMultiLayerImageModel is an interface containing methods for a multi-layered image. A multi-layered image has the ability to have multiple layers of LayeredImageModels where each image is the same size. The layered image model works by setting a current layer and then IFunctions can be applied to the current layer. The current layer can also be toggled on and off and each layer can be toggles on and off by setting it to be the current one and toggling it. Layers can also be swapped. When exporting a multi-layer image only the topmost visible layer is exported.
+
+MULTILAYERIMAGE
+
+MultiLayerImage is a class that implements IMultiLayerImageModel. This class is an image model with multiple layers with all the functionality as a described in the IMultiLayerImageModel interface.
+
+IEXPORTIMAGE
+
+IExportImage is an interface for classes that export images as ppm, jpg, or png files.
+
+EXPORTIMAGE
+
+ExportImage implements IExportImage and takes in an ImageModel to be exported as the given filetype.
+
+LIMEMAIN
+
+LimeMain is the file that contains the main method.
+
 Citations: 
 The P3 File "croppedMule.ppm" used as an example is curtesy of The United States Naval Academy IC210 Website. 
 https://www.usna.edu/Users/cs/choi/ic210/project/p01/index.html
