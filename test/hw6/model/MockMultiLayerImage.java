@@ -70,7 +70,7 @@ public class MockMultiLayerImage implements IMultiLayerImageModel {
   @Override
   public ImageModel getTop() throws IllegalArgumentException {
     try {
-      ap.append("return top layer.");
+      ap.append("return top layer.\n");
     } catch (IOException e) {
       throw new IllegalArgumentException("Could not write to appendable.");
     }

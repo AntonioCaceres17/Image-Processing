@@ -15,7 +15,7 @@ public class LayeredImage2D implements LayeredImageModel  {
   private ImageModel image;
 
   /**
-   * Constrcutor for LayeredImage2D class.
+   * Constructor for LayeredImage2D class.
    *
    * @param name      the descriptive name of the layer
    * @param isVisible whether the layer is visible or not
@@ -58,8 +58,6 @@ public class LayeredImage2D implements LayeredImageModel  {
     if (function == null) {
       throw new IllegalArgumentException("Function is null.");
     }
-
-    // THIS MIGHT ALIAS WILL HAVE TO TEST THIS
     LayeredImageModel oldImage = new LayeredImage2D(this.name, this.isVisible, this.image);
     this.image = function.apply(this.image);
     return oldImage;
