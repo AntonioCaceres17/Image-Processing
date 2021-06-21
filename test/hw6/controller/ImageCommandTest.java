@@ -229,4 +229,16 @@ public class ImageCommandTest {
     assertEquals("Add layer: res/Acadia.png\n"
         + "return top layer.\n", ap.toString());
   }
+
+  @Test
+  public void testExportJPG() {
+    Readable rd = new StringReader("import res/Acadia.png\n"
+        + "export res/Acadia.png");
+    Appendable ap = new StringBuilder();
+    IMultiLayerImageModel model = new MultiLayerImage();
+    ImageController controller = new ImageCommand(model, rd, ap);
+    controller.read();
+    assertEquals("Add layer: res/Acadia.png\n"
+        + "return top layer.\n", ap.toString());
+  }
 }

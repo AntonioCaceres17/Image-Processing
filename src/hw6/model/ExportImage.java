@@ -13,14 +13,18 @@ import javax.imageio.ImageIO;
  */
 public class ExportImage implements IExportImage {
 
-  private ImageModel image;
+  private final ImageModel image;
 
   /**
    * Constructor for ExportImage class.
    *
    * @param image image to be exported.
+   * @throws IllegalArgumentException if the image is null
    */
-  public ExportImage(ImageModel image) {
+  public ExportImage(ImageModel image) throws IllegalArgumentException {
+    if (image == null) {
+      throw new IllegalArgumentException("Image cannot be null.");
+    }
     this.image = image;
   }
 
@@ -66,10 +70,13 @@ public class ExportImage implements IExportImage {
 
   @Override
   public void makeImage(String filename, String imageFormat) throws IllegalArgumentException {
+    if (imageFormat == null) {
+      throw new IllegalArgumentException("image format is null.");
+    }
     if (image.getPixels().length == 0 || filename == null) {
       throw new IllegalArgumentException("Image or Filename is invalid!");
     }
-    if (!filename.endsWith(".jpeg")) {
+    if (!filename.endsWith(".jpeg") || !filename.endsWith(".jpg") || filename.endsWith(".png")) {
       throw new IllegalArgumentException("Filename must end with .ppm");
     }
     File fileJPEG = new File(filename);
