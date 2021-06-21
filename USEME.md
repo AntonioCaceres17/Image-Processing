@@ -4,7 +4,7 @@ This is the USEME File to go along with our JAR File and the ImageCommand class.
 To import an image : import [name] (must be a valid image file name) :   IMPORT ex.png
 This will automatically create a new layer. 
 
-To make an image in the stack as current image : current [insex(0-size -1)] : CURRENT 1
+To make an image in the stack as current image : current [index(0-size -1)] : CURRENT 1
 
 To toggle the current layers visibility: toggle 
 
