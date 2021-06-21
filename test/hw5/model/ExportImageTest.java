@@ -1,7 +1,14 @@
 package hw5.model;
 
 import hw5.model.Image2D.ImageReader;
+import hw6.controller.ImageCommand;
+import hw6.controller.ImageController;
 import hw6.model.ExportImage;
+import hw6.model.IMultiLayerImageModel;
+import hw6.model.MultiLayerImage;
+import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.lang.ModuleLayer.Controller;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
@@ -28,5 +35,15 @@ public class ExportImageTest {
     exportImage.makePPM("AcadiaCopy.ppm");
     ImageModel copy = ImageReader.createImageFromPPM("AcadiaCopy.ppm");
     assertEquals(copy, image);
+  }
+
+  @Test
+  public void testExportToJPEG() {
+    Readable rd = new StringReader("import src/Acadia.JPG");
+    Appendable ap = new StringBuilder();
+    IMultiLayerImageModel model = new MultiLayerImage();
+    ImageController control = new ImageCommand(model, rd,ap);
+    control.read();
+
   }
 }

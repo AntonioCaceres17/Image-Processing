@@ -69,10 +69,10 @@ public class ExportImage implements IExportImage {
     if (image.getPixels().length == 0 || filename == null) {
       throw new IllegalArgumentException("Image or Filename is invalid!");
     }
-    if (!filename.endsWith(".jpeg")) {
-      throw new IllegalArgumentException("Filename must end with .ppm");
+    if (!filename.endsWith("." + imageFormat)) {
+      throw new IllegalArgumentException("Filename must end with ." + imageFormat);
     }
-    File fileJPEG = new File(filename);
+    File file = new File(filename);
     try {
       IPixel[][] pixels = image.getPixels();
       BufferedImage img = new BufferedImage(image.width(), image.height(),
@@ -87,9 +87,9 @@ public class ExportImage implements IExportImage {
           img.setRGB(x, y, rgb);
         }
       }
-      ImageIO.write(img, imageFormat, fileJPEG);
+      ImageIO.write(img, imageFormat, file);
     } catch (IOException e) {
-      throw new IllegalArgumentException("Could not create JPEG File.");
+      throw new IllegalArgumentException("Could not create Image File.");
     }
   }
 }
