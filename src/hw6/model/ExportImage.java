@@ -73,7 +73,7 @@ public class ExportImage implements IExportImage {
     if (image.getPixels().length == 0 || filename == null) {
       throw new IllegalArgumentException("Image or Filename is invalid!");
     }
-    if (!filename.endsWith("." + imageFormat)) {
+    if (!filename.toLowerCase().endsWith("." + imageFormat.toLowerCase())) {
       throw new IllegalArgumentException("Filename must end with ." + imageFormat);
     }
     File file = new File(filename);
@@ -81,12 +81,11 @@ public class ExportImage implements IExportImage {
       IPixel[][] pixels = image.getPixels();
       BufferedImage img = new BufferedImage(image.width(), image.height(),
           BufferedImage.TYPE_INT_ARGB);
-      for (int y = 0; y < pixels.length; y++) {
-        for (int x = 0; x < pixels[y].length; x++) {
+      for (int x = 0; x < pixels.length; x++) {
+        for (int y = 0; y < pixels[y].length; y++) {
           IPixel thisPixel = pixels[x][y];
           int rgb = thisPixel.getRed();
           rgb = (rgb << 8) + thisPixel.getGreen();
-          //TODO: Put this in the pixel class (GetRGB)....
           rgb = (rgb << 8) + thisPixel.getBlue();
           img.setRGB(x, y, rgb);
         }
