@@ -19,8 +19,12 @@ public class ExportImage implements IExportImage {
    * Constructor for ExportImage class.
    *
    * @param image image to be exported.
+   * @throws IllegalArgumentException if image is null
    */
-  public ExportImage(ImageModel image) {
+  public ExportImage(ImageModel image) throws IllegalArgumentException {
+    if (image == null) {
+      throw new IllegalArgumentException("Image is null.");
+    }
     this.image = image;
   }
 
