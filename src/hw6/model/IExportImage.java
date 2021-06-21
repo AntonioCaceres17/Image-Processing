@@ -1,5 +1,7 @@
 package hw6.model;
 
+import java.io.IOException;
+
 public interface IExportImage {
 
   /**
@@ -8,7 +10,7 @@ public interface IExportImage {
    * @param filename the desired name of the file to be written and exported
    * @throws IllegalArgumentException if the Image or filename is invalid or could not be created
    */
-  void makePPM(String filename) throws IllegalArgumentException;
+  void makePPM(String filename) throws IllegalArgumentException, IOException;
 
   /**
    * Writes and creates a specified Image File of the ImageModel, as supported by the

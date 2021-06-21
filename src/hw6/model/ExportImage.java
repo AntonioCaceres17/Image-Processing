@@ -13,18 +13,14 @@ import javax.imageio.ImageIO;
  */
 public class ExportImage implements IExportImage {
 
-  private final ImageModel image;
+  private ImageModel image;
 
   /**
    * Constructor for ExportImage class.
    *
    * @param image image to be exported.
-   * @throws IllegalArgumentException if the image is null
    */
-  public ExportImage(ImageModel image) throws IllegalArgumentException {
-    if (image == null) {
-      throw new IllegalArgumentException("Image cannot be null.");
-    }
+  public ExportImage(ImageModel image) {
     this.image = image;
   }
 
@@ -70,16 +66,13 @@ public class ExportImage implements IExportImage {
 
   @Override
   public void makeImage(String filename, String imageFormat) throws IllegalArgumentException {
-    if (imageFormat == null) {
-      throw new IllegalArgumentException("image format is null.");
-    }
     if (image.getPixels().length == 0 || filename == null) {
       throw new IllegalArgumentException("Image or Filename is invalid!");
     }
-    if (!filename.endsWith(".jpeg") || !filename.endsWith(".jpg") || filename.endsWith(".png")) {
-      throw new IllegalArgumentException("Filename must end with .ppm");
+    if (!filename.endsWith("." + imageFormat)) {
+      throw new IllegalArgumentException("Filename must end with ." + imageFormat);
     }
-    File fileJPEG = new File(filename);
+    File file = new File(filename);
     try {
       IPixel[][] pixels = image.getPixels();
       BufferedImage img = new BufferedImage(image.width(), image.height(),
@@ -94,9 +87,9 @@ public class ExportImage implements IExportImage {
           img.setRGB(x, y, rgb);
         }
       }
-      ImageIO.write(img, imageFormat, fileJPEG);
+      ImageIO.write(img, imageFormat, file);
     } catch (IOException e) {
-      throw new IllegalArgumentException("Could not create " + imageFormat + " File.");
+      throw new IllegalArgumentException("Could not create Image File.");
     }
   }
 }
