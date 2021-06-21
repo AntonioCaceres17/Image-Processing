@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="Gestures:jar">
+  <artifact type="jar" build-on-make="true" name="Gestures:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Gestures_jar</output-path>
     <root id="archive" name="HW5Clone.jar">
       <element id="module-output" name="HW5Clone" />
