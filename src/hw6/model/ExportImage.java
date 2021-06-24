@@ -74,7 +74,7 @@ public class ExportImage implements IExportImage {
       throw new IllegalArgumentException("Image or Filename is invalid!");
     }
     if (!filename.toLowerCase().endsWith("." + imageFormat.toLowerCase())) {
-      throw new IllegalArgumentException("Filename must end with ." + imageFormat);
+      throw new IllegalArgumentException("Filename must end with " + imageFormat);
     }
     File file = new File(filename);
     try {
