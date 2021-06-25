@@ -85,6 +85,10 @@ EXPORTIMAGE
 
 ExportImage implements IExportImage and takes in an ImageModel to be exported as the given filetype.
 
+MOSAIC
+
+Mosaic is a class that implements IFunction and turns a given ImageModel into a "mosaiced" version of the image. A Mosaic takes in a seed which is the number of tiles the "mosaiced" image will have. When the apply method is called with a given image it works by randomly generating the number of tiles based on the given number of seeds and connecting the closest pixel to the closest seed location and then averaging the color value of all those pixels.
+
 LIMEMAIN
 
 LimeMain is the file that contains the main method.
