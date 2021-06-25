@@ -89,6 +89,10 @@ MOSAIC
 
 Mosaic is a class that implements IFunction and turns a given ImageModel into a "mosaiced" version of the image. A Mosaic takes in a seed which is the number of tiles the "mosaiced" image will have. When the apply method is called with a given image it works by randomly generating the number of tiles based on the given number of seeds and connecting the closest pixel to the closest seed location and then averaging the color value of all those pixels.
 
+DOWNSIZE
+
+Downsize is a class that implements IFunction and downsizes an image. Downsize takes in 2 arguments, how much to scale down width and height. The inputs must be a doubles greater than 0 and less than or equal to 1. When the user calls apply on a valid ImageModel a new ImageModel is returned scaled down to the correct size.
+
 LIMEMAIN
 
 LimeMain is the file that contains the main method.
