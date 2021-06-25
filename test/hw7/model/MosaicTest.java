@@ -1,33 +1,37 @@
 package hw7.model;
 
+import hw5.model.IFunction;
 import hw5.model.Image2D.ImageReader;
 import hw5.model.ImageModel;
-import hw6.model.ExportImage;
+import hw5.model.RGBPixel;
+import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class MosaicTest {
 
-  @Test
-  public void testMosaic() {
-    ImageModel image = ImageReader.createImageFromPPM("res/Acadia.ppm");
-    ImageModel mosaicImage = new Mosaic(150).apply(image);
-    ExportImage exportMosaic = new ExportImage(mosaicImage);
-    exportMosaic.makePPM("res/MosaicAcadia.ppm");
+  private ImageModel image;
+
+  @Before
+  public void setUp() {
+    image = ImageReader.createImageFromPPM("res/Acadia.ppm");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testNullImage() {
+    IFunction mosaic = new Mosaic(1000);
+    mosaic.apply(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testMosaicWithNoSeeds() {
+    IFunction mosaic = new Mosaic(0);
   }
 
   @Test
-  public void testMosaic300Seeds() {
-    ImageModel image = ImageReader.createImageFromPPM("res/Acadia.ppm");
-    ImageModel mosaicImage = new Mosaic(300).apply(image);
-    ExportImage exportMosaic = new ExportImage(mosaicImage);
-    exportMosaic.makePPM("res/MosaicAcadia300.ppm");
-  }
-
-  @Test
-  public void testMosaic1500Seeds() {
-    ImageModel image = ImageReader.createImageFromPPM("res/Acadia.ppm");
-    ImageModel mosaicImage = new Mosaic(1500).apply(image);
-    ExportImage exportMosaic = new ExportImage(mosaicImage);
-    exportMosaic.makePPM("res/MosaicAcadia1500.ppm");
+  public void testTileAveragesColor() {
+    IFunction mosaic = new Mosaic(1);
+    ImageModel mosaicImage = mosaic.apply(image);
+    assertEquals(mosaicImage.getPixel(100, 100), mosaicImage.getPixel(0,0));
   }
 }

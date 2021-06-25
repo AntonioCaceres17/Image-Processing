@@ -33,6 +33,10 @@ public class Mosaic implements IFunction {
 
   @Override
   public ImageModel apply(ImageModel image) throws IllegalArgumentException {
+    if (image == null) {
+      throw new IllegalArgumentException("Image is null.");
+    }
+
     Map<Point, List<Point>> seedLocs = generateSeedLocations(image);
     IPixel[][] mosaicPixels = new IPixel[image.height()][image.width()];
 
