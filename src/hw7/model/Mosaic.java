@@ -7,17 +7,27 @@ import hw5.model.RGBPixel;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
+/**
+ * Class representing a function object for turning an image into a mosaic version of iteself.
+ */
 public class Mosaic implements IFunction {
 
   private final int seeds;
 
-  public Mosaic(int seeds) {
+  /**
+   * Constructor for Mosaic class.
+   *
+   * @param seeds number of seeds
+   * @throws IllegalArgumentException if the number of seeds is less than or equal to 0
+   */
+  public Mosaic(int seeds) throws IllegalArgumentException {
+    if (seeds <= 0) {
+      throw new IllegalArgumentException("Number of seeds must be greater than 0.");
+    }
     this.seeds = seeds;
   }
 
