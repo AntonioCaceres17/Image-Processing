@@ -3,7 +3,6 @@ package hw7.model;
 import hw5.model.IFunction;
 import hw5.model.Image2D.ImageReader;
 import hw5.model.ImageModel;
-import hw5.model.RGBPixel;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
