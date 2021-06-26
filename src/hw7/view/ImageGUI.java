@@ -46,6 +46,7 @@ public class ImageGUI extends JFrame implements IView  {
   private JPanel imagePanel;
   private ArrayList<JLabel> imageLabels;
   private JScrollPane scrollImage;
+  private JLabel currentImage;
   private JTabbedPane buttonPanel;
   private HashMap<String, JLabel> LoImage;
   private String imagePath;
@@ -71,7 +72,7 @@ public class ImageGUI extends JFrame implements IView  {
     setSize(700, 500);
     makeFileMenu();
     buttonCreator();
-   makeFrame();
+    makeFrame();
     super.setVisible(true);
     commands = new ActionMap();
 
@@ -96,8 +97,10 @@ public class ImageGUI extends JFrame implements IView  {
     editPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, imagePanel, buttonPanel);
     /// Setting Image
     imagePanel = new JPanel();
-    imageLabels = new ArrayList<>();
-    scrollImage = new JScrollPane();
+    currentImage = new JLabel("res/Acadia.png");
+    currentImage.setIcon(new ImageIcon("res/Acadia.png"));
+    scrollImage = new JScrollPane(currentImage);
+
     //Change Dimensions....
     scrollImage.setPreferredSize(new Dimension(300, 600));
     imagePanel.setBorder(BorderFactory.createTitledBorder("Image being edited."));
@@ -108,7 +111,7 @@ public class ImageGUI extends JFrame implements IView  {
     tabs.addTab("Edit", editPanel);
     tabs.addTab("File", filePanel);
     super.add(tabs);
-    // imagePanel.add(scrollImage);
+    imagePanel.add(scrollImage);
     editPanel.add(imagePanel);
   }
 
@@ -129,27 +132,27 @@ public class ImageGUI extends JFrame implements IView  {
 
   private void buttonCreator() {
     buttonPanel = new JTabbedPane();
-    buttonPanel.setPreferredSize(new Dimension(300, 500 ));
-   JPanel transformationTab = new JPanel();
-   JPanel layeredImageTab = new JPanel();
-   JPanel filterTab = new JPanel();
+    buttonPanel.setPreferredSize(new Dimension(300, 500));
+    JPanel transformationTab = new JPanel();
+    JPanel layeredImageTab = new JPanel();
+    JPanel filterTab = new JPanel();
 
     sepiaButton = new JButton("Sepia");
     sepiaButton.setActionCommand("Sepia");
 
-    JButton monoButton = new JButton("MonoChrome");
+    monoButton = new JButton("MonoChrome");
     monoButton.setActionCommand("Mono");
 
 
-    JButton blurButton = new JButton("Blur");
+    blurButton = new JButton("Blur");
     blurButton.setActionCommand("Blur");
 
 
-    JButton sharpenButton = new JButton("Sharpen");
+    sharpenButton = new JButton("Sharpen");
     sharpenButton.setActionCommand("Sharpen");
 
 
-    JButton mosaicButton = new JButton("Mosaic");
+    mosaicButton = new JButton("Mosaic");
     mosaicButton.setActionCommand("Mosaic");
 
 
@@ -157,15 +160,15 @@ public class ImageGUI extends JFrame implements IView  {
     resizeButton.setActionCommand("Downsize");
 
 
-    JButton removeLayerButton = new JButton("Remove Layer");
+    removeLayerButton = new JButton("Remove Layer");
     removeLayerButton.setActionCommand("Remove");
 
 
-    JButton goBackButton = new JButton("Go back 1 layer");
+    goBackButton = new JButton("Go back 1 layer");
     goBackButton.setActionCommand("Back");
 
 
-    JButton goForwardButton = new JButton("Go Forward 1 Layer");
+    goForwardButton = new JButton("Go Forward 1 Layer");
     goForwardButton.setActionCommand("Forward");
 
 
@@ -183,7 +186,7 @@ public class ImageGUI extends JFrame implements IView  {
     layeredImageTab.add(removeLayerButton);
 
     buttonPanel.addTab("Image Layer", layeredImageTab);
-   buttonPanel.addTab("Transformation", transformationTab);
+    buttonPanel.addTab("Transformation", transformationTab);
     buttonPanel.add("Filter", filterTab);
 
 //    buttonPanel.setLayout(new CardLayout());
@@ -268,7 +271,8 @@ public class ImageGUI extends JFrame implements IView  {
     editPanel.repaint();
   }
 
+  @Override
   public void setImage(String imagePath) {
-    //scrollImage.
+    currentImage.setIcon(new ImageIcon(imagePath));
   }
 }

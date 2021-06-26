@@ -37,8 +37,8 @@ public class ImageCommand implements ImageController {
   private IMultiLayerImageModel model;
   private final Readable rd;
   private final Appendable ap;
-  private Map<String, IFunction> singleImageCommands;
-  private Map<String, Consumer<Scanner>> multiLayerImageCommands;
+  protected Map<String, IFunction> singleImageCommands;
+  protected Map<String, Consumer<Scanner>> multiLayerImageCommands;
   private ImageView view;
 
   /**

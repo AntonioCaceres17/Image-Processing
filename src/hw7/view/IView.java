@@ -14,5 +14,7 @@ public interface IView {
 
   void updateImage(String imageFilePath);
 
+  void setImage(String imagePath);
+
   void updateView();
 }
