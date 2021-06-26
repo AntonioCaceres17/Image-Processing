@@ -17,15 +17,30 @@ Appendable ap;
   }
 
   /**
-   * Similar to our ReadLine from ImageCommand, this reads the current state of the view
-   * and translates action accordingly
+   * Similar to our ReadLine from ImageCommand, this reads the current state of the view and
+   * translates action accordingly
+   *
    * @param
    */
-  public void getState() {}
+  public void getState() {
+  }
 
 
   @Override
-  public void actionPerformed(ActionEvent e) {
+  public void actionPerformed(ActionEvent e) throws IllegalArgumentException {
+    String command = e.getActionCommand();
+    if (imageButtonCommandWithDropDownMenuMap.containsKey(command)) {
+      imageButtonCommandWithDropDownMenuMap.get(command).run();
+    } else if (imageButtonNoTextNeededCommandMap.containsKey(command)) {
+      model.apply(imageButtonNoTextNeededCommandMap.get(command));
+    } else {
+      throw new IllegalArgumentException("Command not found.");
+    }
+    view.updateImage(model.layerName());
   }
 
+  @Override
+  public void run() throws IllegalArgumentException {
+
+  }
 }

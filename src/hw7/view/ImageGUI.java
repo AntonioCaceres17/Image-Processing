@@ -1,5 +1,7 @@
 package hw7.view;
 
+import hw5.model.ImageModel;
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -9,6 +11,7 @@ import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.ActionMap;
 import javax.swing.BorderFactory;
@@ -22,27 +25,45 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.ScrollPaneLayout;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
-public class ImageGUI extends JFrame implements IView, ActionListener {
+/**
+ * This class is a graphical user interface that acts as a view for an image with multiple layers.
+ */
+public class ImageGUI extends JFrame implements IView  {
 
   private JSplitPane editPanel;
   private JPanel filePanel;
-  private boolean isThereImage;
   private JPanel imagePanel;
+  private ArrayList<JLabel> imageLabels;
   private JScrollPane scrollImage;
   private JTabbedPane buttonPanel;
   private HashMap<String, JLabel> LoImage;
-  JLabel imagePath;
+  private String imagePath;
   private JPopupMenu fileMenu = new JPopupMenu();
   private ActionMap commands;
+
+  private JButton openImageButton;
+  private JButton exportImageButton;
+
+  private JButton sepiaButton;
+  private JButton monoButton;
+  private JButton blurButton;
+  private JButton sharpenButton;
+  private JButton mosaicButton;
+  private JButton resizeButton;
+  private JButton removeLayerButton;
+  private JButton goBackButton;
+  private JButton goForwardButton;
 
   public ImageGUI() {
     super();
@@ -52,64 +73,59 @@ public class ImageGUI extends JFrame implements IView, ActionListener {
     buttonCreator();
    makeFrame();
     super.setVisible(true);
-    isThereImage = false;
     commands = new ActionMap();
 
   }
 
-private void makeFrame() {
-  editPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, imagePanel, buttonPanel);
-  /// Setting Image
-  imagePanel = new JPanel();
-  JLabel imageLabel = new JLabel();
-  scrollImage = new JScrollPane(imageLabel);
-  //Change Dimensions....
-scrollImage.setPreferredSize(new Dimension(300,600));
-  imagePanel.setBorder(BorderFactory.createTitledBorder("Image being edited."));
-  imagePanel.setLayout(new GridLayout(1,0,10,10));
-  editPanel.setLayout(new BoxLayout(editPanel, BoxLayout.LINE_AXIS));
-  editPanel.setDividerLocation(150);
-  JTabbedPane tabs = new JTabbedPane(1);
-  tabs.addTab("Edit", editPanel);
-  tabs.addTab("File", filePanel);
-  super.add(tabs);
-  imagePanel.add(scrollImage);
-  editPanel.add(imagePanel);
-
-
-}
-
-
-
-private void makeFileMenu() {
-  filePanel = new JPanel();
-  filePanel.setLayout(new FlowLayout());
-  JButton openImageButton = new JButton("Import Image");
-  openImageButton.setActionCommand("Open Image");
-  openImageButton.addActionListener(this);
-
-  JButton exportImageButton = new JButton("Export Image");
-  exportImageButton.setActionCommand("Save Image");
-  exportImageButton.addActionListener(this);
-
- imagePath = new JLabel("\"File path will appear here\"");
-
-
-
-  filePanel.add(openImageButton);
-  filePanel.add(exportImageButton);
-}
-
-
-
-
-  public void addImage(String filename) {
-    LoImage.put(filename, new JLabel());
-    LoImage.get(filename).setIcon(new ImageIcon(filename));
-    imagePanel.add(LoImage.get(filename));
-
+  public void setListener(ActionListener listener) {
+    openImageButton.addActionListener(listener);
+    exportImageButton.addActionListener(listener);
+    sepiaButton.addActionListener(listener);
+    monoButton.addActionListener(listener);
+    sharpenButton.addActionListener(listener);
+    blurButton.addActionListener(listener);
+    mosaicButton.addActionListener(listener);
+    resizeButton.addActionListener(listener);
+    removeLayerButton.addActionListener(listener);
+    goBackButton.addActionListener(listener);
+    goForwardButton.addActionListener(listener);
 
   }
+
+  private void makeFrame() {
+    editPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, imagePanel, buttonPanel);
+    /// Setting Image
+    imagePanel = new JPanel();
+    imageLabels = new ArrayList<>();
+    scrollImage = new JScrollPane();
+    //Change Dimensions....
+    scrollImage.setPreferredSize(new Dimension(300, 600));
+    imagePanel.setBorder(BorderFactory.createTitledBorder("Image being edited."));
+    imagePanel.setLayout(new GridLayout(1, 0, 10, 10));
+    editPanel.setLayout(new BoxLayout(editPanel, BoxLayout.LINE_AXIS));
+    editPanel.setDividerLocation(150);
+    JTabbedPane tabs = new JTabbedPane(1);
+    tabs.addTab("Edit", editPanel);
+    tabs.addTab("File", filePanel);
+    super.add(tabs);
+    // imagePanel.add(scrollImage);
+    editPanel.add(imagePanel);
+  }
+
+
+  private void makeFileMenu() {
+    filePanel = new JPanel();
+    filePanel.setLayout(new FlowLayout());
+    openImageButton = new JButton("Import Image");
+    openImageButton.setActionCommand("Open Image");
+
+    exportImageButton = new JButton("Export Image");
+    exportImageButton.setActionCommand("Save Image");
+
+    filePanel.add(openImageButton);
+    filePanel.add(exportImageButton);
+  }
+
 
   private void buttonCreator() {
     buttonPanel = new JTabbedPane();
@@ -118,44 +134,39 @@ private void makeFileMenu() {
    JPanel layeredImageTab = new JPanel();
    JPanel filterTab = new JPanel();
 
-
-    JButton sepiaButton = new JButton("Sepia");
+    sepiaButton = new JButton("Sepia");
     sepiaButton.setActionCommand("Sepia");
-    sepiaButton.addActionListener(this);
 
     JButton monoButton = new JButton("MonoChrome");
     monoButton.setActionCommand("Mono");
-    monoButton.addActionListener(this);
+
 
     JButton blurButton = new JButton("Blur");
     blurButton.setActionCommand("Blur");
-    blurButton.addActionListener(this);
+
 
     JButton sharpenButton = new JButton("Sharpen");
     sharpenButton.setActionCommand("Sharpen");
-    sharpenButton.addActionListener(this);
+
 
     JButton mosaicButton = new JButton("Mosaic");
     mosaicButton.setActionCommand("Mosaic");
-    mosaicButton.addActionListener(this);
 
-    JButton resizeButton = new JButton("Image Resize");
-    resizeButton.setActionCommand("Resize");
-    resizeButton.addActionListener(this);
+
+    resizeButton = new JButton("Image Downsize");
+    resizeButton.setActionCommand("Downsize");
 
 
     JButton removeLayerButton = new JButton("Remove Layer");
     removeLayerButton.setActionCommand("Remove");
-    removeLayerButton.addActionListener(this);
+
 
     JButton goBackButton = new JButton("Go back 1 layer");
     goBackButton.setActionCommand("Back");
-    goBackButton.addActionListener(this);
 
 
     JButton goForwardButton = new JButton("Go Forward 1 Layer");
     goForwardButton.setActionCommand("Forward");
-    goForwardButton.addActionListener(this);
 
 
     transformationTab.setLayout(new FlowLayout());
@@ -167,53 +178,97 @@ private void makeFileMenu() {
     filterTab.add(monoButton);
     filterTab.add(mosaicButton);
 
-
     layeredImageTab.add(goForwardButton);
     layeredImageTab.add(goBackButton);
     layeredImageTab.add(removeLayerButton);
-
 
     buttonPanel.addTab("Image Layer", layeredImageTab);
    buttonPanel.addTab("Transformation", transformationTab);
     buttonPanel.add("Filter", filterTab);
 
-
-
 //    buttonPanel.setLayout(new CardLayout());
-  //  buttonPanel.add(combo);
+    //  buttonPanel.add(combo);
   }
 
   @Override
-  public void actionPerformed(ActionEvent e) {
-    //TODO : Make an observer method in the Controller that can read this swtich method
-    //TODO : Finish all the commands for the view(Most are for the controller)
-    //TODO : Be able to display image from Controller.
-      switch (e.getActionCommand()) {
-        case "Open Image" : {
-          final JFileChooser fchooser = new JFileChooser(".");
-          FileNameExtensionFilter filter = new FileNameExtensionFilter(
-              "JPEG, PNG, & PPM Images", "jpeg", "png", "ppm");
-          fchooser.setFileFilter(filter);
-          int retvalue = fchooser.showOpenDialog(ImageGUI.this);
-          if (retvalue == JFileChooser.APPROVE_OPTION) {
-            File f = fchooser.getSelectedFile();
-            //****** Maybe a new method that saves this file path? ****
-            imagePath.setText(f.getAbsolutePath());
-          }
-        }
-        break;
-        case "Save Image" :  {
-          final JFileChooser fchooser = new JFileChooser(".");
-          int retvalue = fchooser.showSaveDialog(ImageGUI.this);
-          if (retvalue == JFileChooser.APPROVE_OPTION) {
-            File f = fchooser.getSelectedFile();
-            imagePath.setText(f.getAbsolutePath());
+  public void updateImage(String filename) {
+    scrollImage.revalidate();
+    JLabel newImage = new JLabel();
+    newImage.setIcon(new ImageIcon(filename));
+    scrollImage.repaint();
+    imageLabels.add(newImage);
+    imagePanel.revalidate();
+    imagePanel.add(scrollImage);
+    imagePanel.repaint();
+  }
 
-          }
+
+
+  @Override
+  public String dropDown(String command) {
+    switch (command) {
+      case "import": {
+        final JFileChooser fchooser = new JFileChooser(".");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+            "JPEG, PNG, & PPM Images", "jpeg", "png", "ppm");
+        fchooser.setFileFilter(filter);
+        int retvalue = fchooser.showOpenDialog(ImageGUI.this);
+        if (retvalue == JFileChooser.APPROVE_OPTION) {
+          File f = fchooser.getSelectedFile();
+          //****** Maybe a new method that saves this file path? ****
+          return f.getAbsolutePath();
         }
-        break;
       }
+      break;
+      case "export": {
+        final JFileChooser fchooser = new JFileChooser(".");
+        int retvalue = fchooser.showSaveDialog(ImageGUI.this);
+        if (retvalue == JFileChooser.APPROVE_OPTION) {
+          File f = fchooser.getSelectedFile();
+          return f.getAbsolutePath();
+        }
+      }
+      break;
+      case "downsize": {
+        JPanel panel = new JPanel(new BorderLayout(5,5));
+        JPanel label = new JPanel(new GridLayout(0,1,2,2));
+        label.add(new JLabel("Enter Width"));
+        label.add(new JLabel("Enter Height"));
+        panel.add(label, BorderLayout.WEST);
+
+        JPanel controller = new JPanel(new GridLayout( 0 ,1, 2,2));
+        JTextField width = new JTextField();
+        controller.add(width);
+        JTextField height = new JTextField();
+        controller.add(height);
+        panel.add(controller, BorderLayout.CENTER);
+        JOptionPane.showMessageDialog(this, panel,
+            "Downsize dimensions", JOptionPane.OK_CANCEL_OPTION);
+
+        return width.getText() + "," + height.getText();
+      }
+
+      case "mosaic":
+        JPanel panel = new JPanel(new BorderLayout(5,5));
+        JPanel label = new JPanel(new GridLayout(0,1,2,2));
+        label.add(new JLabel("Enter Seed Number"));
+        panel.add(label, BorderLayout.CENTER);
+
+       return JOptionPane.showInputDialog(this, panel,
+            "Seed Number", JOptionPane.OK_CANCEL_OPTION);
+
+
     }
+    throw new IllegalArgumentException("Invalid Command");
+  }
 
+  @Override
+  public void updateView() {
+    editPanel.revalidate();
+    editPanel.repaint();
+  }
 
+  public void setImage(String imagePath) {
+    //scrollImage.
+  }
 }
