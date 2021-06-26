@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="HW5Clone:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/HW5Clone_jar</output-path>
+    <root id="archive" name="HW5Clone.jar">
+      <element id="module-output" name="HW5Clone" />
+    </root>
+  </artifact>
+</component>

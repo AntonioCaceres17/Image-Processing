@@ -15,6 +15,8 @@ import hw6.model.IMultiLayerImageModel;
 import hw6.model.LayeredImage2D;
 import hw6.model.LayeredImageModel;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
@@ -24,6 +26,7 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.function.Consumer;
 import javax.imageio.ImageIO;
+import javax.swing.text.html.ImageView;
 
 /**
  * T This class is able to take in batch commands to either load, edit, or save images This is able
@@ -36,6 +39,7 @@ public class ImageCommand implements ImageController {
   private final Appendable ap;
   private Map<String, IFunction> singleImageCommands;
   private Map<String, Consumer<Scanner>> multiLayerImageCommands;
+  private ImageView view;
 
   /**
    * Constructor for the ImageCommand class.
@@ -45,7 +49,7 @@ public class ImageCommand implements ImageController {
    * @param ap    appendable to write to a view
    * @throws IllegalArgumentException
    */
-  public ImageCommand(IMultiLayerImageModel model, Readable rd, Appendable ap)
+  public ImageCommand(IMultiLayerImageModel model,  Readable rd, Appendable ap)
       throws IllegalArgumentException {
     try {
       Objects.requireNonNull(model, "Model cannot be null!");
@@ -164,4 +168,5 @@ public class ImageCommand implements ImageController {
       throw new IllegalArgumentException("Arguments after export must be of type String.");
     }
   }
+
 }

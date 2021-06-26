@@ -3,6 +3,8 @@ package hw6.controller;
 import hw6.model.IMultiLayerImageModel;
 import hw6.model.MockMultiLayerImage;
 import hw6.model.MultiLayerImage;
+import hw7.view.ImageGUI;
+import hw7.view.IView;
 import java.io.StringReader;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -223,6 +225,7 @@ public class ImageCommandTest {
         + "export res/Acadia.png");
     Appendable ap = new StringBuilder();
     IMultiLayerImageModel model = new MultiLayerImage();
+    IView view = new ImageGUI();
     ImageController controller = new ImageCommand(model, rd, ap);
     controller.read();
     assertEquals("", ap.toString());
